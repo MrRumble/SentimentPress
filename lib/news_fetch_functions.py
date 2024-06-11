@@ -2,11 +2,15 @@ import pandas as pd
 from newsapi import NewsApiClient
 from datetime import datetime, timedelta
 from transformers import pipeline
+import os
+from dotenv import load_dotenv
 
 from models.article import Article #transformers library uses advanced machine learning and trained on large text models
 
-# Initialize News API client with your API key
-newsapi = NewsApiClient(api_key='559c8cef5f0440dc919a589056dd603e')
+# Load environment variables from .env file
+load_dotenv()
+api_key = os.getenv("NEWS_API_KEY")
+newsapi = NewsApiClient(api_key=api_key)
 
 # Initialize the sentiment analysis pipeline
 sentiment_pipeline = pipeline('sentiment-analysis')
@@ -59,6 +63,8 @@ def fetch_and_process_query(query, page_size):  # query is the search parameter 
 
         return df_sorted
         # Calculate the average sentiment score
+
+############################
 
 def calculate_average_sentiment(df):
     return df['Sentiment Score'].mean()
