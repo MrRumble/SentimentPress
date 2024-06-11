@@ -1,0 +1,4 @@
+pandas==1.3.0
+newsapi-python==0.2.6
+transformers==4.8.2
+pytest
