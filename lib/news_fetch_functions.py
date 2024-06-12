@@ -28,7 +28,9 @@ def fetch_articles(query, page_size, language='en', from_date=yesterday_date, to
 def extract_article_info(article):
     title = article['title']
     description = article['description']
-    published_at = article['publishedAt']
+    published_at = article['publishedAt'] #type str
+    print("published at: ", published_at)
+    print(type(published_at))
     source = article['source'].get('name')
     return title, description, published_at, source
 
