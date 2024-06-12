@@ -18,54 +18,6 @@ sentiment_pipeline = pipeline('sentiment-analysis')
 # Calculate the date for yesterday
 yesterday_date = (datetime.now() - timedelta(1)).strftime('%Y-%m-%d')
 
-##### BREAK DOWN THIS FUNCTION (MUCH EASIER TO TEST) ####
-# def fetch_and_process_query(query, page_size):  # query is the search parameter to retrieve articles by and amount of articles
-#     #page size must be < 100
-#     language = 'en'
-
-#     # Fetch the news articles from yesterday
-#     articles = newsapi.get_everything(q=query, language=language, page_size=page_size, from_param=yesterday_date, to=yesterday_date)
-
-#     # Check if the request was successful
-#     if articles['status'] == 'ok':
-#         # Create a list to store article data
-#         article_data = []
-        
-#         # Iterate through each article and extract its title, description, and content
-#         for article in articles['articles']:
-#             title = article['title']
-#             description = article['description']
-#             published_at = article['publishedAt']
-#             source = article['source'].get('name')
-            
-#             # Combine title and description
-#             text = f"{title}. {description}"
-            
-#             # Perform sentiment analysis on the combined text
-#             if text:
-#                 sentiment = sentiment_pipeline(text)
-#                 sentiment_score = sentiment[0]['score'] if sentiment[0]['label'] == 'POSITIVE' else -sentiment[0]['score']
-#             else:
-#                 sentiment_score = None
-            
-#             # Append article data to the list if sentiment score is within the specified range
-#             if sentiment_score != 0 and title is not None and description is not None:
-#                 article_data.append({
-#                     'Published Date': published_at,
-#                     'Title': title,
-#                     'Description': description,
-#                     'Source': source,
-#                     'Sentiment Score': sentiment_score
-#                 })
-#         df = pd.DataFrame(article_data)
-#         # Sort DataFrame by 'Sentiment Score' column
-#         df_sorted = df.sort_values(by='Sentiment Score', ascending=False)
-
-#         return df_sorted
-#         # Calculate the average sentiment score
-
-# ############################
-
 def fetch_articles(query, page_size, language='en', from_date=yesterday_date, to_date=yesterday_date):
     articles = newsapi.get_everything(q=query, language=language, page_size=page_size, from_param=from_date, to=to_date)
     if articles['status'] == 'ok':
