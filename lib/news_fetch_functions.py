@@ -29,15 +29,13 @@ def extract_article_info(article):
     title = article['title']
     description = article['description']
     published_at = article['publishedAt'] #type str
-    print("published at: ", published_at)
-    print(type(published_at))
     source = article['source'].get('name')
     return title, description, published_at, source
 
 def combine_text(title, description):
     return f"{title}. {description}"
 
-def analyze_sentiment(text):
+def analyse_sentiment(text):
     if text:
         sentiment = sentiment_pipeline(text)
         sentiment_score = sentiment[0]['score'] if sentiment[0]['label'] == 'POSITIVE' else -sentiment[0]['score']
@@ -53,19 +51,19 @@ def validate_article(title, description, sentiment_score):
 def process_article(article):
     title, description, published_at, source = extract_article_info(article)
     text = combine_text(title, description)
-    sentiment_score = analyze_sentiment(text)
+    sentiment_score = analyse_sentiment(text)
     if validate_article(title, description, sentiment_score):
         return {
             'Published Date': published_at,
             'Title': title,
-            'Description': description,
+            'Description': description, 
             'Source': source,
             'Sentiment Score': sentiment_score
         }
     return None
 
-def create_dataframe(article_data):
-    return pd.DataFrame(article_data)
+def create_dataframe(article_data): #I GOT HERE!
+    return pd.DataFrame(article_data)  
 
 def sort_dataframe(df, column='Sentiment Score'):
     return df.sort_values(by=column, ascending=False)
@@ -77,7 +75,14 @@ def fetch_and_process_query(query, page_size): #Combines all of the above functi
     df_sorted = sort_dataframe(df)
     return df_sorted
 
-def calculate_average_sentiment(df):
+# TODO: STILL GETTING NULL VALUES IN CSV WHEN REMOVED
+### INCLUDE TOTAL ARTICLE COUNT
+
+#######################################
+# Additional functions below, not yet used in app, so havent been tested yet
+#######################################
+
+def calculate_average_sentiment(df): 
     return df['Sentiment Score'].mean()
 
 def calculate_positive_sentiment_count(df):
@@ -124,8 +129,5 @@ def bottom_three_articles(df):
     return articles
     
 
-        
 
-### STILL GETTING NULL VALUES IN CSV
-### INCLUDE TOTAL ARTICLE COUNT
 
