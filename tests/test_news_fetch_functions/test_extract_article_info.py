@@ -9,7 +9,7 @@ def test_extract_article_info_correct():
     article = {
         'title': 'Test Article 1',
         'description': 'Description 1',
-        'published at': '2024-06-11T14:08:22Z',
+        'publishedAt': '2024-06-11T14:08:22Z',
         'source': {'name': 'Source 1'}
     }
     expected_result = ("Test Article 1", "Description 1", '2024-06-11T14:08:22Z', 'Source 1')
