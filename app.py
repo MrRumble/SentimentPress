@@ -1,4 +1,3 @@
-from lib.news_fetch_functions import fetch_and_process_query
+from lib.news_fetch_functions import *
 
-df = fetch_and_process_query('trump', 100)
-print(df.head())
+df = fetch_and_process_query('football', 100)

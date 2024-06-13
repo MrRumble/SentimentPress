@@ -28,7 +28,7 @@ def fetch_articles(query, page_size, language='en', from_date=yesterday_date, to
 def extract_article_info(article):
     title = article['title']
     description = article['description']
-    published_at = article['publishedAt'] #type str
+    published_at = article['published at'] #type str
     source = article['source'].get('name')
     return title, description, published_at, source
 
@@ -43,10 +43,14 @@ def analyse_sentiment(text):
         sentiment_score = None
     return sentiment_score
 
+#Some articles are removed from news source after publishing, still recorded on API 
+# so need to be cleaned out.
 def validate_article(title, description, sentiment_score):
     if sentiment_score != 0 and title is not None and description is not None:
-        return True
+        if '[Removed]' not in title and '[Removed]' not in description:
+            return True
     return False
+
 
 def process_article(article):
     title, description, published_at, source = extract_article_info(article)
@@ -75,8 +79,36 @@ def fetch_and_process_query(query, page_size): #Combines all of the above functi
     df_sorted = sort_dataframe(df)
     return df_sorted
 
-# TODO: STILL GETTING NULL VALUES IN CSV WHEN REMOVED
-### INCLUDE TOTAL ARTICLE COUNT
+def top_three_articles(df):
+    articles = []
+    sorted_df = df.sort_values(by='Sentiment Score', ascending=False)
+    for idx, row in sorted_df.head(3).iterrows():
+        title = row['Title']
+        description = row['Description']
+        published_date = row['Published Date']
+        source = row['Source']
+        sentiment = row['Sentiment Score']
+        article = Article(None, title, description, published_date, source, sentiment)
+        articles.append(article)
+    return articles
+
+def bottom_three_articles(df):
+    articles = []
+    sorted_df = df.sort_values(by='Sentiment Score')
+    for idx, row in sorted_df.head(3).iterrows():
+        title = row['Title']
+        description = row['Description']
+        published_date = row['Published Date']
+        source = row['Source']
+        sentiment = row['Sentiment Score']
+        article = Article(None, title, description, published_date, source, sentiment)
+        articles.append(article)
+    return articles
+
+#TODO Handle cases where no articles are returned from query
+#TODO Handle cases where articles returned are less than 6
+
+
 
 #######################################
 # Additional functions below, not yet used in app, so havent been tested yet
@@ -105,28 +137,7 @@ def save_df_to_csv(df):
     else:
         print("No articles found.")
 
-def top_three_articles(df):
-    articles = []
-    for idx, row in df.head(3).iterrows():
-        title = row['Title']
-        description = row['Description']
-        published_date = row['Published Date']
-        source = row['Source']
-        article = Article(None, title, description, published_date, source)
-        articles.append(article)
-    return articles
 
-def bottom_three_articles(df):
-    articles = []
-    for idx, row in df.tail(3).iterrows():
-        title = row['Title']
-        description = row['Description']
-        published_date = row['Published Date']
-        source = row['Source']
-        sentiment = row['Sentiment Score']
-        article = Article(None, title, description, published_date, source, sentiment)
-        articles.append(article)
-    return articles
     
 
 
