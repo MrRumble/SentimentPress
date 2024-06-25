@@ -4,6 +4,7 @@ from datetime import datetime, timedelta
 from transformers import pipeline
 import os
 from dotenv import load_dotenv
+import matplotlib
 
 from models.article import Article #transformers library uses advanced machine learning and trained on large text models
 
@@ -113,6 +114,9 @@ def bottom_three_articles(df):
 #######################################
 # Additional functions below, not yet used in app, so havent been tested yet
 #######################################
+
+# def create_box_plot(df):
+#     return df.boxplot(column=df['Sentiment Score'])
 
 def calculate_average_sentiment(df): 
     return df['Sentiment Score'].mean()
