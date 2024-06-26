@@ -1,16 +1,14 @@
 import { useState } from 'react'
 import './App.css'
-import ApiComponent from './components/ApiComponent'; 
-import GlobeScene from './components/globe_component/script';
+
+import SearchForm from './components/search_compnent/SearchComponent';
 
 const App = () => {
   return (
     <div>
-      <h1>SentimentPress</h1>
       
-      <ApiComponent />
-     
-      {/* Insert other components here */}
+      <SearchForm/>
+
     </div>
   );
 };

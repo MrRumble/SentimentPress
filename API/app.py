@@ -8,7 +8,7 @@ load_dotenv()
 app = Flask(__name__)
 CORS(app)
 
-from routes.test_route import *
+from routes.query_route import *
 
 if __name__ == '__main__':
     app.run(debug=True, port=int(os.environ.get('PORT', 5002)))

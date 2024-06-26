@@ -13,3 +13,13 @@ class Article:
 
     def __eq__(self, other):
         return self.__dict__ == other.__dict__
+    
+    def to_dict(self):
+        return {
+            'id': self.id,
+            'title': self.title,
+            'description': self.description,
+            'published_date': self.published_date,
+            'source': self.source,
+            'sentiment': self.sentiment
+        }

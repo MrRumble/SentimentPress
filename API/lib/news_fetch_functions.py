@@ -90,7 +90,7 @@ def top_three_articles(df):
         source = row['Source']
         sentiment = row['Sentiment Score']
         article = Article(None, title, description, published_date, source, sentiment)
-        articles.append(article)
+        articles.append(article.to_dict())  # Convert Article object to dictionary
     return articles
 
 def bottom_three_articles(df):
@@ -103,8 +103,9 @@ def bottom_three_articles(df):
         source = row['Source']
         sentiment = row['Sentiment Score']
         article = Article(None, title, description, published_date, source, sentiment)
-        articles.append(article)
+        articles.append(article.to_dict())  # Convert Article object to dictionary
     return articles
+
 
 #TODO Handle cases where no articles are returned from query
 #TODO Handle cases where articles returned are less than 6
@@ -114,9 +115,6 @@ def bottom_three_articles(df):
 #######################################
 # Additional functions below, not yet used in app, so havent been tested yet
 #######################################
-
-# def create_box_plot(df):
-#     return df.boxplot(column=df['Sentiment Score'])
 
 def calculate_average_sentiment(df): 
     return df['Sentiment Score'].mean()
