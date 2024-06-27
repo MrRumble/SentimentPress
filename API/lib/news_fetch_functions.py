@@ -15,6 +15,7 @@ newsapi = NewsApiClient(api_key=api_key)
 
 # Initialize the sentiment analysis pipeline
 sentiment_pipeline = pipeline('sentiment-analysis')
+text_generation_pipeline = pipeline('summarization')
 
 # Calculate the date for yesterday
 yesterday_date = (datetime.now() - timedelta(1)).strftime('%Y-%m-%d')
@@ -106,6 +107,24 @@ def bottom_three_articles(df):
         articles.append(article.to_dict())  # Convert Article object to dictionary
     return articles
 
+def summarise_top_bottom_articles(df, top_n=3, bottom_n=3, max_summary_sentences=6):
+    # Extract titles and descriptions for top and bottom n articles
+    top_articles = df.nlargest(top_n, 'Sentiment Score')
+    bottom_articles = df.nsmallest(bottom_n, 'Sentiment Score')
+    
+    combined_text = '. '.join(top_articles['Title'] + '. ' + top_articles['Description']) + '. ' + \
+                    '. '.join(bottom_articles['Title'] + '. ' + bottom_articles['Description'])
+    
+    # Generate a summary using the Transformers pipeline
+    summary = text_generation_pipeline(combined_text, max_length=300, min_length=30, num_return_sequences=1, early_stopping=True)
+    summarized_text = summary[0]['summary_text']
+    
+    # Reduce the summary to the desired number of sentences
+    summarized_sentences = summarized_text.split('. ')
+    if len(summarized_sentences) > max_summary_sentences:
+        summarized_text = '. '.join(summarized_sentences[:max_summary_sentences]) + '.'
+    
+    return summarized_text
 
 #TODO Handle cases where no articles are returned from query
 #TODO Handle cases where articles returned are less than 6
