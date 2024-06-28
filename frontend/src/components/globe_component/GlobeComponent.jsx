@@ -1,56 +1,42 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef } from 'react';
+import { Canvas, useFrame, useLoader } from '@react-three/fiber';
+import { Sphere } from '@react-three/drei';
 import * as THREE from 'three';
+import earthTexture from './globeTexture.png'; // Ensure this path is correct
 
-const Globe = () => {
+const Globe = ({ position, scale }) => {
   const globeRef = useRef();
+  const texture = useLoader(THREE.TextureLoader, earthTexture);
 
-  useEffect(() => {
-    let scene, camera, renderer, globe;
-
-    // Set up scene
-    scene = new THREE.Scene();
-    camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    renderer = new THREE.WebGLRenderer();
-    renderer.setSize(window.innerWidth, window.innerHeight);
-    globeRef.current.appendChild(renderer.domElement);
-
-    // Create globe geometry
-    const geometry = new THREE.SphereGeometry(5, 32, 32);
-    const texture = new THREE.TextureLoader().load('./globeTexture.png'); // Adjust path as necessary
-    const material = new THREE.MeshBasicMaterial({ map: texture });
-    globe = new THREE.Mesh(geometry, material);
-    scene.add(globe);
-
-    // Set up animation
-    const animate = () => {
-      requestAnimationFrame(animate);
-      globe.rotation.y += 0.005;
-      renderer.render(scene, camera);
-    };
-
-    // Resize handler
-    const handleResize = () => {
-      camera.aspect = window.innerWidth / window.innerHeight;
-      camera.updateProjectionMatrix();
-      renderer.setSize(window.innerWidth, window.innerHeight);
-    };
-
-    window.addEventListener('resize', handleResize);
-
-    // Clean up
-    return () => {
-      window.removeEventListener('resize', handleResize);
-      globeRef.current.removeChild(renderer.domElement);
-    };
-
-    // Start animation
-    animate();
-
-  }, []);
+  useFrame(() => {
+    if (globeRef.current) {
+      globeRef.current.rotation.x += 0.003; // Adjust rotation speed if needed
+    }
+  });
 
   return (
-    <div style={{ width: '100%', height: '100%' }} ref={globeRef} />
+    <Sphere ref={globeRef} args={[1, 32, 32]} position={position} scale={scale}>
+      <meshStandardMaterial map={texture} />
+    </Sphere>
   );
 };
 
-export default Globe;
+const StaticGlobeBackdrop = () => {
+  const globePosition = [0, -3.5, 0]; // Centered globe position
+  const globeScale = [3, 3, 3.]; // Adjust scale as needed
+
+  return (
+    <div style={{ width: '100%', height: '100vh', position: 'fixed', top: 0, left: 0, zIndex: -1 }}>
+      <Canvas
+        style={{ width: '100%', height: '100%' }}
+        resize={{ polyfill: ResizeObserver }}
+      >
+        <ambientLight intensity={0.5} />
+        <directionalLight position={[5, 5, 5]} />
+        <Globe position={globePosition} scale={globeScale} />
+      </Canvas>
+    </div>
+  );
+};
+
+export default StaticGlobeBackdrop;

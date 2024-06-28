@@ -23,21 +23,19 @@
 .search-button {
     padding: 10px 20px;
     font-size: 16px;
-    background-color: #007bff;
     color: white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
+
 }
 
 .search-button:hover {
-    background-color: #0056b3;
+    background-color: #00b36b;
 }
 
 .results-container {
-    background-color: #f9f9f9;
     padding: 20px;
-    border: 1px solid #ddd;
     border-radius: 4px;
 }
 
@@ -55,7 +53,7 @@
 }
 
 .article-item {
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.025);
     padding: 20px;
     margin-bottom: 20px;
     border: 1px solid #ddd;
@@ -65,7 +63,7 @@
 
 .article-item h3 {
     margin-top: 0;
-    color: #333;
+    color: #fffdfd;
 }
 
 .article-item p {
@@ -73,5 +71,5 @@
 }
 
 .article-item strong {
-    color: #007bff;
+    color: #00bbff;
 }

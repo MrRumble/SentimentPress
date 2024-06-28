@@ -51,7 +51,7 @@ const SearchForm = () => {
                             <li><strong>Positive Count:</strong> {searchResults.query_info.positive_count}</li>
                             <li><strong>Negative Count:</strong> {searchResults.query_info.negative_count}</li>
                             <li><strong>Mean Sentiment:</strong> {searchResults.query_info.mean_sentiment}</li>
-                            <li><strong>Summmary:</strong> {searchResults.query_info.summary}</li>
+                            <li><strong>Summary:</strong> {searchResults.query_info.summary}</li>
                         </ul>
                     </div>
 
