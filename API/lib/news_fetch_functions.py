@@ -49,8 +49,7 @@ def analyse_sentiment(text):
 # so need to be cleaned out.
 def validate_article(title, description, sentiment_score):
     if sentiment_score != 0 and title is not None and description is not None:
-        if '[Removed]' not in title and '[Removed]' not in description:
-            return True
+        return '[Removed]' not in title and '[Removed]' not in description
     return False
 
 
@@ -81,7 +80,7 @@ def fetch_and_process_query(query, page_size): #Combines all of the above functi
     df_sorted = sort_dataframe(df)
     return df_sorted
 
-def top_three_articles(df):
+def top_three_articles(df): #REFACTORING?
     articles = []
     sorted_df = df.sort_values(by='Sentiment Score', ascending=False)
     for idx, row in sorted_df.head(3).iterrows():
@@ -94,7 +93,7 @@ def top_three_articles(df):
         articles.append(article.to_dict())  # Convert Article object to dictionary
     return articles
 
-def bottom_three_articles(df):
+def bottom_three_articles(df): #REFACTORING?
     articles = []
     sorted_df = df.sort_values(by='Sentiment Score')
     for idx, row in sorted_df.head(3).iterrows():
@@ -128,7 +127,6 @@ def summarise_top_bottom_articles(df, top_n=3, bottom_n=3, max_summary_sentences
 
 #TODO Handle cases where no articles are returned from query
 #TODO Handle cases where articles returned are less than 6
-
 
 
 #######################################
