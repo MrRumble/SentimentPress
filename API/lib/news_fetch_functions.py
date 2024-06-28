@@ -115,7 +115,7 @@ def summarise_top_bottom_articles(df, top_n=3, bottom_n=3, max_summary_sentences
                     '. '.join(bottom_articles['Title'] + '. ' + bottom_articles['Description'])
     
     # Generate a summary using the Transformers pipeline
-    summary = text_generation_pipeline(combined_text, max_length=300, min_length=30, num_return_sequences=1, early_stopping=True)
+    summary = text_generation_pipeline(combined_text, max_length=200, min_length=30, num_return_sequences=1, early_stopping=True)
     summarized_text = summary[0]['summary_text']
     
     # Reduce the summary to the desired number of sentences
