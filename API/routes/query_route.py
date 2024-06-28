@@ -1,6 +1,7 @@
 from flask import jsonify, request
 from app import app
 from lib.news_fetch_functions import *
+from lib.database_connection import get_db
 
 @app.route("/query", methods=["POST"])
 def query_route():
@@ -8,7 +9,6 @@ def query_route():
     query = data.get('query', '')
     news_results_df = fetch_and_process_query(query, 100)
     df_summarised = summarise_top_bottom_articles(news_results_df)
-    print(df_summarised, "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
     # topics = get_topics_for_dataframe(news_results_df)
     # print(topics)
 
@@ -21,6 +21,8 @@ def query_route():
     bottom3 = bottom_three_articles(news_results_df)
     news_results = news_results_df.to_dict(orient='records')
     total_articles = len(news_results_df)
+
+    
 
     query_info ={   
         "total_articles": total_articles,
@@ -37,5 +39,14 @@ def query_route():
         'top3': top3,
         'bottom3': bottom3   
     }
+
+    # data we want to send to database
+    search_terms = {
+        "search_term" : query,
+        "search_category": None,
+    }
+
+    db_connection = get_db()
+    db_connection["test-db"].insert_one(search_terms)
 
     return jsonify(response_data)
