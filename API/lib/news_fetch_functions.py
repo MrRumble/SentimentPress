@@ -80,30 +80,34 @@ def fetch_and_process_query(query, page_size): #Combines all of the above functi
     df_sorted = sort_dataframe(df)
     return df_sorted
 
-def top_three_articles(df): #REFACTORING?
-    articles = []
-    sorted_df = df.sort_values(by='Sentiment Score', ascending=False)
-    for idx, row in sorted_df.head(3).iterrows():
-        title = row['Title']
-        description = row['Description']
-        published_date = row['Published Date']
-        source = row['Source']
-        sentiment = row['Sentiment Score']
-        article = Article(None, title, description, published_date, source, sentiment)
-        articles.append(article.to_dict())  # Convert Article object to dictionary
+def top_three_articles(df):
+    top_articles_df = df.nlargest(3, 'Sentiment Score')
+    articles = [
+        {
+            "title": row['Title'],
+            "description": row['Description'],
+            "published_date": row['Published Date'],
+            "source": row['Source'],
+            "sentiment": row['Sentiment Score']
+        }
+        for _, row in top_articles_df.iterrows()
+    ]
+
     return articles
 
-def bottom_three_articles(df): #REFACTORING?
-    articles = []
-    sorted_df = df.sort_values(by='Sentiment Score')
-    for idx, row in sorted_df.head(3).iterrows():
-        title = row['Title']
-        description = row['Description']
-        published_date = row['Published Date']
-        source = row['Source']
-        sentiment = row['Sentiment Score']
-        article = Article(None, title, description, published_date, source, sentiment)
-        articles.append(article.to_dict())  # Convert Article object to dictionary
+def bottom_three_articles(df):
+    bottom_articles_df = df.nsmallest(3, 'Sentiment Score')
+    articles = [
+        {
+            "title": row['Title'],
+            "description": row['Description'],
+            "published_date": row['Published Date'],
+            "source": row['Source'],
+            "sentiment": row['Sentiment Score']
+        }
+        for _, row in bottom_articles_df.iterrows()
+    ]
+
     return articles
 
 def summarise_top_bottom_articles(df, top_n=3, bottom_n=3, max_summary_sentences=6):
