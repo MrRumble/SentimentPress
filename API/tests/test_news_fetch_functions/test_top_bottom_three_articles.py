@@ -14,38 +14,74 @@ df = pd.DataFrame(test_data)
 
 def test_top_three_articles():
     expected_articles = [
-        Article(None, 'Title 3', 'Description 3', '2024-06-13T08:15:45Z', 'Source 3', 0.9),
-        Article(None, 'Title 1', 'Description 1', '2024-06-11T14:08:22Z', 'Source 1', 0.8),
-        Article(None, 'Title 2', 'Description 2', '2024-06-12T10:30:00Z', 'Source 2', 0.7)
+        {
+            "title": 'Title 3',
+            "description": 'Description 3',
+            "published_date": '2024-06-13T08:15:45Z',
+            "source": 'Source 3',
+            "sentiment": 0.9
+        },
+        {
+            "title": 'Title 1',
+            "description": 'Description 1',
+            "published_date": '2024-06-11T14:08:22Z',
+            "source": 'Source 1',
+            "sentiment": 0.8
+        },
+        {
+            "title": 'Title 2',
+            "description": 'Description 2',
+            "published_date": '2024-06-12T10:30:00Z',
+            "source": 'Source 2',
+            "sentiment": 0.7
+        }
     ]
-
     top_articles = top_three_articles(df)
+    print(top_articles)
 
     assert len(top_articles) == len(expected_articles) 
     for top_article, expected_article in zip(top_articles, expected_articles):
-        assert top_article.title == expected_article.title
-        assert top_article.description == expected_article.description
-        assert top_article.published_date == expected_article.published_date
-        assert top_article.source == expected_article.source
-        assert top_article.sentiment == expected_article.sentiment
+        assert top_article['title'] == expected_article['title']
+        assert top_article['description'] == expected_article['description']
+        assert top_article['published_date'] == expected_article['published_date']
+        assert top_article['source'] == expected_article['source']
+        assert top_article['sentiment'] == expected_article['sentiment']
+
 
 def test_bottom_three_articles():
     expected_articles = [
-        Article(None, 'Title 4', 'Description 4', '2024-06-14T09:20:30Z', 'Source 4', 0.6),
-        Article(None, 'Title 2', 'Description 2', '2024-06-12T10:30:00Z', 'Source 2', 0.7),
-        Article(None, 'Title 1', 'Description 1', '2024-06-11T14:08:22Z', 'Source 1', 0.8)
-    ]
+    {
+        "title": 'Title 4',
+        "description": 'Description 4',
+        "published_date": '2024-06-14T09:20:30Z',
+        "source": 'Source 4',
+        "sentiment": 0.6
+    },
+    {
+        "title": 'Title 2',
+        "description": 'Description 2',
+        "published_date": '2024-06-12T10:30:00Z',
+        "source": 'Source 2',
+        "sentiment": 0.7
+    },
+    {
+        "title": 'Title 1',
+        "description": 'Description 1',
+        "published_date": '2024-06-11T14:08:22Z',
+        "source": 'Source 1',
+        "sentiment": 0.8
+    }
+]
 
     bottom_articles = bottom_three_articles(df)
 
-    assert len(expected_articles) == len(bottom_articles)
+    assert len(bottom_articles) == len(expected_articles)
     for bottom_article, expected_article in zip(bottom_articles, expected_articles):
-        assert bottom_article.title == expected_article.title
-        assert bottom_article.description == expected_article.description
-        assert bottom_article.published_date == expected_article.published_date
-        assert bottom_article.source == expected_article.source
-        assert bottom_article.sentiment == expected_article.sentiment 
-
+        assert bottom_article['title'] == expected_article['title']
+        assert bottom_article['description'] == expected_article['description']
+        assert bottom_article['published_date'] == expected_article['published_date']
+        assert bottom_article['source'] == expected_article['source']
+        assert bottom_article['sentiment'] == expected_article['sentiment']
 
     
 
