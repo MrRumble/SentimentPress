@@ -1,9 +1,12 @@
 import pandas as pd
 
-#--- This class is used to convert the article data into a pandas dataframe, easier to sort
-#--- the data into descending order based on sentiment. Could be argued to be an unnessery step?
-#--- On the other hand provides an easy way of saving data to csv, 
-# which is not being used in our application as of yet but might be usefuo further down the line
+"""
+This class converts article data into a pandas dataframe, 
+facilitating easy sorting based on sentiment in descending order. 
+While it may be considered an unnecessary step, 
+it also provides a straightforward method for saving data to CSV, 
+which could prove useful in future applications.
+"""
 
 class DataHandler:
     def create_dataframe(self, article_data):

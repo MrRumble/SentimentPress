@@ -1,10 +1,12 @@
 from transformers import pipeline
 
-# This class was created to try as we wanted a way of ceating a neat summary for each query search. 
-# It utilizes the Hugging Face transformers library to summarize the top and bottom articles based on sentiment scores from a DataFrame.
-# This will give us a neat and concise string to package along with data and send to the database.
-# NOTE: This slows down performace massively, might not actually be the summary system we need. Worth researching summarisers in more detail.
-
+"""
+This class was developed to create concise summaries for each query search. 
+It uses the Hugging Face transformers library to summarize the top and bottom 
+articles based on sentiment scores extracted from a DataFrame. 
+However, it significantly impacts performance and may not be the optimal summarization system for our needs.
+Further research into alternative summarizers is recommended.
+"""
 
 class ArticleSummariser:
     def __init__(self):
