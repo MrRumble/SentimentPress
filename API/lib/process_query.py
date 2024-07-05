@@ -1,7 +1,7 @@
 from datetime import datetime
 from .sentiment_analyser import SentimentAnalyser
 from .news_processor import NewsProcessor
-from .database_connection import get_db
+from .database_connection import DatabaseConnection
 
 
 
@@ -9,6 +9,7 @@ class QueryProcessor:
     def __init__(self):
         self.processor = NewsProcessor()
         self.analyser = SentimentAnalyser()
+        self.database_connection = DatabaseConnection()
 
     def process_query(self, query):
         # Fetch and process articles
@@ -62,5 +63,5 @@ class QueryProcessor:
         return response_data_front_end, search_result_object
 
     def save_search_result_to_db(self, search_result):
-        db_connection = get_db()
+        db_connection = self.database_connection.get_database()
         db_connection["search-results"].insert_one(search_result)
