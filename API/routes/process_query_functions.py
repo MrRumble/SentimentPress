@@ -1,7 +1,8 @@
 # utils.py
 from datetime import datetime
-from lib.news_fetch_functions import *
-from lib.database_connection import get_db
+from API.lib.news_fetch_functions import *
+from API.lib.database_connection import get_db
+
 
 def process_query(query):
     # Pipeline calls, two slow functions.
@@ -17,7 +18,7 @@ def process_query(query):
     # Get top and bottom three articles as dictionaries
     top3 = top_three_articles(news_results_df)
     bottom3 = bottom_three_articles(news_results_df)
-    news_results = news_results_df.to_dict(orient='records') # Every article
+    news_results = news_results_df.to_dict(orient='records')  # Every article
     total_articles = len(news_results_df)
 
     query_info_front_end = {
@@ -49,6 +50,7 @@ def process_query(query):
     }
 
     return response_data_front_end, search_result
+
 
 def save_search_result_to_db(search_result):
     db_connection = get_db()
