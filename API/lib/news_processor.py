@@ -4,8 +4,11 @@ from .sentiment_analyser import SentimentAnalyser
 from .article_summariser import ArticleSummariser
 from .data_handler import DataHandler
 
-# This class serves as the big daddy of operation. It encapsulates all the news amd articles classes and finalises what we need
-# In here we extract all articles from the search query. Extract the top and bottom three articles based on sentiment scores.
+"""
+This class serves as the core component of our system, encapsulating all functionalities related to news and articles.
+It handles the extraction of articles from a search query and identifies the top and bottom three articles based on sentiment scores. 
+The 'query' parameter, received from the front-end server via query_route.py, is processed through the 'fetch_and_process_query' method."
+"""
 
 
 class NewsProcessor:
@@ -54,12 +57,3 @@ class NewsProcessor:
 #CHECK IF THIS IS NEEDED
     def summarise_top_bottom_articles(self, df, top_n=3, bottom_n=3, max_summary_sentences=6):
         return self.summarizer.summarise_top_bottom_articles(df, top_n, bottom_n, max_summary_sentences) 
-
-# Example usage:
-# processor = NewsProcessor()
-# df_sorted = processor.fetch_and_process_query("example query", 100)
-# processor.data_handler.save_df_to_csv(df_sorted)
-# top3 = processor.top_three_articles(df_sorted)
-# bottom3 = processor.bottom_three_articles(df_sorted)
-# summary = processor.summarise_top_bottom_articles(df_sorted)
-# print(summary)

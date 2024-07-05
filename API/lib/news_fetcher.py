@@ -3,9 +3,11 @@ from datetime import datetime, timedelta
 from newsapi import NewsApiClient
 from dotenv import load_dotenv
 
-#----This class handles fetching article data from the newsAPI, we use the newsAPI clients get_everything
-#    based on our given queires. NOTE: we are limited on query parameters due to limited access newsAPI key.
-#     Loads of possible scalable features could be added with full access. -----#
+"""
+This class fetches article data from the newsAPI using the get_everything method of the newsAPI client.
+Note that our access is limited, restricting the range of query parameters available.
+With full access, numerous scalable features could be incorporated!"
+"""
 
 class NewsFetcher:
     def __init__(self):

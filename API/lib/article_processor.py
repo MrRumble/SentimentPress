@@ -1,13 +1,14 @@
 from transformers import pipeline
 
-#------- This class processes individual articles, extracts information we have specified,
-#------- anlyses the sentiment score using transormers pipeline on the combined title and
-#------- description. NOTE: sentiment analysis is quite slow, may need to choose a faster 
-#------- model based on our needs. This app also has the potential scale with a full access 
-#------- newsAPI key, in specific, access to the content of an article, for a more accurate
-#------- sentiment score. We finally validate the article to avoid null results from articles
-#------- being deleted ater publishing. We then process the article into a delicious dictionary
-#------- to be used elsewhere with the sentiment score included.
+"""
+This class processes individual articles, 
+extracting specified information and analyzing sentiment scores using a Transformer pipeline 
+on combined titles and descriptions. 
+Note: sentiment analysis is slow; consider a faster model based on our needs. 
+With full access to a newsAPI key, particularly access to article content, sentiment scoring accuracy could improve. 
+Articles are validated to prevent null results from deleted publications. 
+Finally, articles are transformed into a delicious dictionary format, ready for use elsewhere.
+"""
 
 class ArticleProcessor:
     def __init__(self):

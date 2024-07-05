@@ -1,5 +1,7 @@
-
-# This class serves to run some additional useful and interesting analysis on the article dataframe, which will later be bundled with the search object to send to the database.
+"""
+This class performs additional insightful analysis on the article dataframe,
+which will be bundled with the search object to be sent to the database.
+"""
 
 class SentimentAnalyser:
     def calculate_average_sentiment(self, df):
