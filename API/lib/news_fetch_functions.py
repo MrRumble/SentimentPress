@@ -4,10 +4,8 @@ from datetime import datetime, timedelta
 from transformers import pipeline
 import os
 from dotenv import load_dotenv
-import matplotlib
 
-from models.article import \
-    Article  # transformers library uses advanced machine learning and trained on large text models
+# transformers library uses advanced machine learning and trained on large text models
 
 # Load environment variables from .env file
 load_dotenv()

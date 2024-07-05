@@ -1,6 +1,5 @@
 import pandas as pd
 from lib.news_fetch_functions import top_three_articles, bottom_three_articles
-from models.article import Article
 
 test_data = {
     'Title': ['Title 1', 'Title 2', 'Title 3', 'Title 4'],
@@ -11,6 +10,7 @@ test_data = {
 }
 
 df = pd.DataFrame(test_data)
+
 
 def test_top_three_articles():
     expected_articles = [
@@ -39,7 +39,7 @@ def test_top_three_articles():
     top_articles = top_three_articles(df)
     print(top_articles)
 
-    assert len(top_articles) == len(expected_articles) 
+    assert len(top_articles) == len(expected_articles)
     for top_article, expected_article in zip(top_articles, expected_articles):
         assert top_article['title'] == expected_article['title']
         assert top_article['description'] == expected_article['description']
@@ -50,28 +50,28 @@ def test_top_three_articles():
 
 def test_bottom_three_articles():
     expected_articles = [
-    {
-        "title": 'Title 4',
-        "description": 'Description 4',
-        "published_date": '2024-06-14T09:20:30Z',
-        "source": 'Source 4',
-        "sentiment": 0.6
-    },
-    {
-        "title": 'Title 2',
-        "description": 'Description 2',
-        "published_date": '2024-06-12T10:30:00Z',
-        "source": 'Source 2',
-        "sentiment": 0.7
-    },
-    {
-        "title": 'Title 1',
-        "description": 'Description 1',
-        "published_date": '2024-06-11T14:08:22Z',
-        "source": 'Source 1',
-        "sentiment": 0.8
-    }
-]
+        {
+            "title": 'Title 4',
+            "description": 'Description 4',
+            "published_date": '2024-06-14T09:20:30Z',
+            "source": 'Source 4',
+            "sentiment": 0.6
+        },
+        {
+            "title": 'Title 2',
+            "description": 'Description 2',
+            "published_date": '2024-06-12T10:30:00Z',
+            "source": 'Source 2',
+            "sentiment": 0.7
+        },
+        {
+            "title": 'Title 1',
+            "description": 'Description 1',
+            "published_date": '2024-06-11T14:08:22Z',
+            "source": 'Source 1',
+            "sentiment": 0.8
+        }
+    ]
 
     bottom_articles = bottom_three_articles(df)
 
@@ -82,7 +82,3 @@ def test_bottom_three_articles():
         assert bottom_article['published_date'] == expected_article['published_date']
         assert bottom_article['source'] == expected_article['source']
         assert bottom_article['sentiment'] == expected_article['sentiment']
-
-    
-
-    
