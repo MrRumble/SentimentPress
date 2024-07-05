@@ -1,7 +1,7 @@
 # utils.py
 from datetime import datetime
-from API.lib.news_fetch_functions import *
-from API.lib.database_connection import get_db
+from lib.news_fetch_functions import *
+from lib.database_connection import get_db
 
 
 def process_query(query):
