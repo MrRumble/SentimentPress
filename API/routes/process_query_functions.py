@@ -36,12 +36,13 @@ def process_query(query):
         'bottom3': bottom3
     }
 
-    search_result = {
+    search_result_object = {
         "search_term": query,
-        "date": current_datetime,
+        "search_date": current_datetime,
         "sentiment_score": mean_sentiment,
         "positive_article_count": positive_count,
         "negative_article_count": negative_count,
+        "total_article_count": total_articles,
         "ratio_positive_vs_negative": ratio,
         "main_headline": df_summarised,
         "top_3_articles": top3,
@@ -49,7 +50,7 @@ def process_query(query):
         "user_id": None  # Pull from local storage
     }
 
-    return response_data_front_end, search_result
+    return response_data_front_end, search_result_object
 
 
 def save_search_result_to_db(search_result):
