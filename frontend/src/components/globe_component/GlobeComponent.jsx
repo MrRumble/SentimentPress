@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import { Canvas, useFrame, useLoader } from '@react-three/fiber';
 import { Sphere } from '@react-three/drei';
 import * as THREE from 'three';
-import earthTexture from './globeTexture.png'; // Ensure this path is correct
+import earthTexture from './bigGlobeImage.png'; // Ensure this path is correct
 
 const Globe = ({ position, scale }) => {
   const globeRef = useRef();
