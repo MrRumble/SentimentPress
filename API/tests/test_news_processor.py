@@ -1,5 +1,5 @@
 import pandas as pd
-from lib.news_fetch_functions import top_three_articles, bottom_three_articles
+from lib.news_processor import *
 
 test_data = {
     'Title': ['Title 1', 'Title 2', 'Title 3', 'Title 4'],
@@ -13,6 +13,7 @@ df = pd.DataFrame(test_data)
 
 
 def test_top_three_articles():
+    processor = NewsProcessor()
     expected_articles = [
         {
             "title": 'Title 3',
@@ -36,7 +37,7 @@ def test_top_three_articles():
             "sentiment": 0.7
         }
     ]
-    top_articles = top_three_articles(df)
+    top_articles = processor.top_three_articles(df)
     print(top_articles)
 
     assert len(top_articles) == len(expected_articles)
@@ -49,6 +50,7 @@ def test_top_three_articles():
 
 
 def test_bottom_three_articles():
+    processor = NewsProcessor()
     expected_articles = [
         {
             "title": 'Title 4',
@@ -73,7 +75,7 @@ def test_bottom_three_articles():
         }
     ]
 
-    bottom_articles = bottom_three_articles(df)
+    bottom_articles = processor.bottom_three_articles(df)
 
     assert len(bottom_articles) == len(expected_articles)
     for bottom_article, expected_article in zip(bottom_articles, expected_articles):
