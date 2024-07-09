@@ -9,13 +9,13 @@ This class serves as the core component of our system, encapsulating all functio
 It handles the extraction of articles from a search query and identifies the top and bottom three articles based on sentiment scores. 
 The 'query' parameter, received from the front-end server via query_route.py, is processed through the 'fetch_and_process_query' method."
 """
-
+#TESTED 
 
 class NewsProcessor:
     def __init__(self):
         self.fetcher = NewsFetcher()
         self.processor = ArticleProcessor()
-        self.summarizer = ArticleSummariser()
+        self.summarizer = ArticleSummariser() # <- 
         self.analyzer = SentimentAnalyser()
         self.data_handler = DataHandler()
 

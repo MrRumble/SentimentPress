@@ -2,14 +2,14 @@ from datetime import datetime
 from .sentiment_analyser import SentimentAnalyser
 from .news_processor import NewsProcessor
 from .database_connection import DatabaseConnection
-
-
+from .article_summariser import ArticleSummariser
 
 class QueryProcessor:
     def __init__(self):
         self.processor = NewsProcessor()
         self.analyser = SentimentAnalyser()
         self.database_connection = DatabaseConnection()
+        self.summariser = ArticleSummariser()
 
     def process_query(self, query):
         # Fetch and process articles
@@ -23,6 +23,7 @@ class QueryProcessor:
 
         # Summarize top and bottom articles
         df_summarised = self.processor.summarise_top_bottom_articles(df_sorted)
+
         top3 = self.processor.top_three_articles(df_sorted)
         bottom3 = self.processor.bottom_three_articles(df_sorted)
         news_results = df_sorted.to_dict(orient='records')

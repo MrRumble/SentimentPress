@@ -2,7 +2,7 @@
 This class performs additional insightful analysis on the article dataframe,
 which will be bundled with the search object to be sent to the database.
 """
-
+#Not tested
 class SentimentAnalyser:
     def calculate_average_sentiment(self, df):
         return df['Sentiment Score'].mean()

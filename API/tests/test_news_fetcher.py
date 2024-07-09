@@ -1,4 +1,4 @@
-from lib.news_fetch_functions import fetch_articles
+from lib.news_fetcher import NewsFetcher
 from datetime import datetime, timedelta
 from unittest.mock import patch
 import pytest
@@ -6,7 +6,7 @@ import pytest
 yesterday_date = (datetime.now() - timedelta(1)).strftime('%Y-%m-%d')
 
 #A patch is used to mock "get_everything" method from newsapi client.
-@patch('lib.news_fetch_functions.newsapi.get_everything') 
+@patch('lib.news_fetcher.NewsApiClient.get_everything')
 def test_fetch_articles_successful(mock_get_everything):
     query = "test"
     page_size = 10
@@ -20,10 +20,11 @@ def test_fetch_articles_successful(mock_get_everything):
         ]
     }
     mock_get_everything.return_value = mock_response
-    articles = fetch_articles(query, page_size, language, yesterday_date, yesterday_date)
+    fetcher = NewsFetcher()
+    articles = fetcher.fetch_articles(query, page_size, language, yesterday_date, yesterday_date)
     assert articles == mock_response['articles']
 
-@patch('lib.news_fetch_functions.newsapi.get_everything') 
+@patch('lib.news_fetcher.NewsApiClient.get_everything')
 def test_fetch_articles_fails(mock_get_everything):
     query = "test"
     page_size = 10
@@ -34,8 +35,9 @@ def test_fetch_articles_fails(mock_get_everything):
         'articles': []
     }
     mock_get_everything.return_value = mock_response
+    fetcher = NewsFetcher()
     with pytest.raises(ValueError) as e:
-        articles = fetch_articles(query, page_size, language, yesterday_date, yesterday_date)
+        fetcher.fetch_articles(query, page_size, language, yesterday_date, yesterday_date)
     error_message = str(e.value)
     assert error_message == "Failed to fetch news articles. Check your API key or try again later."
     
