@@ -9,19 +9,22 @@ This class serves as the core component of our system, encapsulating all functio
 It handles the extraction of articles from a search query and identifies the top and bottom three articles based on sentiment scores. 
 The 'query' parameter, received from the front-end server via query_route.py, is processed through the 'fetch_and_process_query' method."
 """
-#TESTED 
+
+
+# TESTED
 
 class NewsProcessor:
     def __init__(self):
         self.fetcher = NewsFetcher()
         self.processor = ArticleProcessor()
-        self.summarizer = ArticleSummariser() # <- 
+        self.summarizer = ArticleSummariser()  # <-
         self.analyzer = SentimentAnalyser()
         self.data_handler = DataHandler()
 
     def fetch_and_process_query(self, query, page_size):
         articles = self.fetcher.fetch_articles(query, page_size)
-        processed_articles = [self.processor.process_article(article) for article in articles if self.processor.process_article(article) is not None]
+        processed_articles = [self.processor.process_article(article) for article in articles if
+                              self.processor.process_article(article) is not None]
         df = self.data_handler.create_dataframe(processed_articles)
         df_sorted = self.data_handler.sort_dataframe(df)
         return df_sorted
@@ -54,6 +57,6 @@ class NewsProcessor:
         ]
         return articles
 
-#CHECK IF THIS IS NEEDED
+    # CHECK IF THIS IS NEEDED
     def summarise_top_bottom_articles(self, df, top_n=3, bottom_n=3, max_summary_sentences=6):
-        return self.summarizer.summarise_top_bottom_articles(df, top_n, bottom_n, max_summary_sentences) 
+        return self.summarizer.summarise_top_bottom_articles(df, top_n, bottom_n, max_summary_sentences)

@@ -7,7 +7,9 @@ While it may be considered an unnecessary step,
 it also provides a straightforward method for saving data to CSV, 
 which could prove useful in future applications.
 """
-#Not tested as only using basic pandas method calls
+
+
+# Not tested as only using basic pandas method calls
 
 class DataHandler:
     def create_dataframe(self, article_data):

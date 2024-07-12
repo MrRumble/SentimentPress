@@ -3,6 +3,7 @@ from dotenv import load_dotenv
 from pymongo import MongoClient
 from pymongo.server_api import ServerApi
 
+
 class DatabaseConnection:
     def __init__(self):
         load_dotenv()

@@ -4,6 +4,7 @@ from .news_processor import NewsProcessor
 from .database_connection import DatabaseConnection
 from .article_summariser import ArticleSummariser
 
+
 class QueryProcessor:
     def __init__(self):
         self.processor = NewsProcessor()
