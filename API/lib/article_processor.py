@@ -9,7 +9,9 @@ With full access to a newsAPI key, particularly access to article content, senti
 Articles are validated to prevent null results from deleted publications. 
 Finally, articles are transformed into a delicious dictionary format, ready for use elsewhere.
 """
-#TESTED
+
+
+# TESTED
 class ArticleProcessor:
     def __init__(self):
         self.sentiment_pipeline = pipeline('sentiment-analysis')

@@ -10,6 +10,7 @@ Unit tested, each method in the ArticleProcessor class.
 Finished with a Class-Level test.
 """
 
+
 def test_extract_article_info_correct():
     processor = ArticleProcessor()
     article = {
@@ -20,6 +21,7 @@ def test_extract_article_info_correct():
     }
     expected_result = ("Test Article 1", "Description 1", '2024-06-11T14:08:22Z', 'Source 1')
     assert processor.extract_article_info(article) == expected_result
+
 
 def test_combine_text():
     processor = ArticleProcessor()
@@ -38,6 +40,7 @@ def test_analyse_sentiment_positive(mock_pipeline):
     result = processor.analyse_sentiment(text)
     assert result == 0.9
 
+
 @patch('lib.article_processor.pipeline')
 def test_analyse_sentiment_negative(mock_pipeline):
     mock_sentiment = MagicMock(return_value=[{'label': 'NEGATIVE', 'score': 0.8}])
@@ -48,11 +51,13 @@ def test_analyse_sentiment_negative(mock_pipeline):
     result = processor.analyse_sentiment(text)
     assert result == -0.8
 
+
 def test_analyse_sentiment_empty_text():
     processor = ArticleProcessor()
     text = ""
     result = processor.analyse_sentiment(text)
     assert result is None
+
 
 def test_analyse_sentiment_none_text():
     processor = ArticleProcessor()
@@ -65,27 +70,33 @@ def test_validate_article_true():
     processor = ArticleProcessor()
     assert processor.validate_article('title', 'description', 0.8) == True
 
+
 def test_validate_article_none_title_false():
     processor = ArticleProcessor()
     assert processor.validate_article(None, 'description', 0.8) == False
+
 
 def test_validate_article_none_description_false():
     processor = ArticleProcessor()
     assert processor.validate_article('title', None, 0.8) == False
 
+
 def test_validate_article_sentiment_zero_false():
     processor = ArticleProcessor()
     assert processor.validate_article('title', 'description', 0) == False
+
 
 def test_validate_article_none_title_description_false():
     processor = ArticleProcessor()
     assert processor.validate_article(None, None, 0.8) == False
 
+
 def test_validate_article_removed_returns_false():
     processor = ArticleProcessor()
     assert processor.validate_article('[Removed]', '[Removed]', 0.8) == False
 
-#-------- Class level test for process_article (uses every other method)
+
+# -------- Class level test for process_article (uses every other method)
 
 def test_process_article_valid_article():
     processor = ArticleProcessor()
@@ -95,20 +106,19 @@ def test_process_article_valid_article():
         'publishedAt': '2024-06-11T14:08:22Z',
         'source': {'name': 'Source 1'}
     }
-    
-    processor.extract_article_info = MagicMock(return_value=("Test Title", "Test Description", "2024-06-11T14:08:22Z", "Test Source"))
+
+    processor.extract_article_info = MagicMock(
+        return_value=("Test Title", "Test Description", "2024-06-11T14:08:22Z", "Test Source"))
     processor.combine_text = MagicMock(return_value="title. description")
-    processor.analyse_sentiment = MagicMock(return_value = 0.9)
-    processor.validate_article =MagicMock(return_value=True)
+    processor.analyse_sentiment = MagicMock(return_value=0.9)
+    processor.validate_article = MagicMock(return_value=True)
 
     expected_result = {
-            'Published Date': "2024-06-11T14:08:22Z",
-            'Title': "Test Title",
-            'Description': "Test Description",
-            'Source': "Test Source",
-            'Sentiment Score': 0.9
+        'Published Date': "2024-06-11T14:08:22Z",
+        'Title': "Test Title",
+        'Description': "Test Description",
+        'Source': "Test Source",
+        'Sentiment Score': 0.9
     }
 
     assert processor.process_article(article) == expected_result
-
-

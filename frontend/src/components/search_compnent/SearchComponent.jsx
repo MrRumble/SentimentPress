@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import './SearchComponent.css'; // Import the CSS file
 
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+// const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
 
 const SearchForm = () => {
     const [query, setQuery] = useState('');

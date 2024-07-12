@@ -9,7 +9,8 @@ Note that our access is limited, restricting the range of query parameters avail
 With full access, numerous scalable features could be incorporated!"
 """
 
-#TESTED
+
+# TESTED
 
 class NewsFetcher:
     def __init__(self):
@@ -23,7 +24,8 @@ class NewsFetcher:
             from_date = self.yesterday_date
         if not to_date:
             to_date = self.yesterday_date
-        articles = self.newsapi.get_everything(q=query, language=language, page_size=page_size, from_param=from_date, to=to_date)
+        articles = self.newsapi.get_everything(q=query, language=language, page_size=page_size, from_param=from_date,
+                                               to=to_date)
         if articles['status'] == 'ok':
             return articles['articles']
         else:

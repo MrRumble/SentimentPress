@@ -3,7 +3,8 @@ from .process_query import QueryProcessor
 from flask_cors import CORS
 
 query_route = Blueprint('query_route', __name__)
-CORS(query_route) 
+CORS(query_route)
+
 
 @query_route.route("/query", methods=["POST"])
 def query():

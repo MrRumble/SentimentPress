@@ -1,8 +1,9 @@
-import React from 'react';
+// import React from 'react';
 import './App.css';
 
 import SpinningGlobe from './components/globe_component/GlobeComponent';
 import SearchForm from './components/search_compnent/SearchComponent';
+import Signup from "./components/signup/signupComponent.jsx";
 
 const App = () => {
   return (
@@ -11,6 +12,9 @@ const App = () => {
       <div className="content">
         
         <SearchForm />
+
+        <Signup />
+
       </div>
     </div>
   );
