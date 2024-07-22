@@ -1,4 +1,5 @@
 from .database_connection import DatabaseConnection
+from flask_bcrypt import Bcrypt
 
 
 class SignupProcessor:
@@ -11,11 +12,14 @@ class SignupProcessor:
         return db_connection['users'].find_one({"email": email}) is not None
 
     def insert_user(self, firstname, lastname, email, password):
+        bcrypt = Bcrypt()
+        hashed_password = bcrypt.generate_password_hash(password, 12).decode('utf-8')
+
         user = {
             "firstname": firstname,
             "lastname": lastname,
             "email": email,
-            "password": password
+            "password": hashed_password
         }
 
         db_connection = self.database_connection.get_database()

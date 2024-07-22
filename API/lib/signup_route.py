@@ -12,7 +12,7 @@ def signup():
     firstname = data.get('firstName', '')
     lastname = data.get('lastName', '')
     email = data.get('email', '')
-    password = data.get('hashedPassword', '')
+    password = data.get('password', '')
 
     print(f"Received signup data: {firstname}, {lastname}, {email}, {password}")
 
