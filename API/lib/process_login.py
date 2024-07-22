@@ -1,4 +1,5 @@
 from .database_connection import DatabaseConnection
+from flask_bcrypt import check_password_hash
 
 
 class LoginProcessor:
@@ -11,6 +12,7 @@ class LoginProcessor:
         print(db_connection['users'].find_one({"email": email}))
         return db_connection['users'].find_one({"email": email}) is not None
 
-    def get_hashed_password(self, email):
+    def password_is_valid(self, email, password):
         db_connection = self.database_connection.get_database()
-        return db_connection['users'].find_one({"email": email})['password']
+        password_hash = db_connection['users'].find_one({"email": email})['password']
+        return check_password_hash(password_hash, password)
