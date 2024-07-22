@@ -1,5 +1,4 @@
 import {useState} from "react";
-import bcrypt from 'bcryptjs'
 
 const Login = () => {
     const [email, setEmail] = useState("");
@@ -7,16 +6,32 @@ const Login = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        async function getHashedPassword() {
-            const response = await fetch(`${email}`);
-            const data = await response.json();
-            return data.password;
-        }
-
-        if (email === "" || password === "") {
+        try {
+            if (email === "" || password === "") {
             alert('Please fill in all fields');
+            }
 
+            const response = await fetch('http://localhost:5002/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({email, password}),
+            });
+
+            const data = await response.json();
+
+            if (response.ok) {
+                // Handle successful login
+                console.log('Login successful');
+                console.log(data)
+                localStorage.setItem('token', data.token);
+            } else {
+                // Handle login error
+                console.error('Login failed:', data.message);
+            }
+        } catch (error) {
+            console.error('Error during login:', error);
         }
     }
 
@@ -42,5 +57,6 @@ const Login = () => {
             </form>
         </div>
     );
-};
 }
+
+export default Login;

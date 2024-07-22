@@ -12,7 +12,7 @@ class QueryProcessor:
         self.database_connection = DatabaseConnection()
         self.summariser = ArticleSummariser()
 
-    def process_query(self, query):
+    def process_query(self, query, user_id=None):
         # Fetch and process articles
         df_sorted = self.processor.fetch_and_process_query(query, 100)
 
@@ -59,7 +59,7 @@ class QueryProcessor:
             "main_headline": df_summarised,
             "top_3_articles": top3,
             "bottom_3_articles": bottom3,
-            "user_id": None  # Pull from local storage
+            "user_id": user_id  # Pull from local storage
         }
 
         return response_data_front_end, search_result_object

@@ -1,31 +1,47 @@
-from .database_connection import DatabaseConnection
+import os
+from datetime import datetime, timedelta, timezone
+from typing import Optional
+import jwt
 from flask_bcrypt import check_password_hash
+from dotenv import load_dotenv
+from .database_connection import DatabaseConnection
+
+load_dotenv()
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 
 class LoginProcessor:
-
     def __init__(self):
-        self.database_connection = DatabaseConnection()
+        self.db = DatabaseConnection().get_database()
+        self.users_collection = self.db['users']
 
-    def email_exists(self, email):
+    def get_user_by_email(self, email: str) -> Optional[dict]:
         try:
-            db_connection = self.database_connection.get_database()
-            user = db_connection['users'].find_one({"email": email})
-            print(f"User found: {user}")
-            return user is not None
-
+            return self.users_collection.find_one({"email": email})
         except Exception as e:
-            print(f"Error checking email existence: {str(e)}")
+            print(f"Database error: {e}")
             raise
 
-    def password_is_valid(self, email, password):
-        try:
-            db_connection = self.database_connection.get_database()
-            user = db_connection['users'].find_one({"email": email})
-            if user and 'password' in user:
-                password_hash = user['password']
-                return check_password_hash(password_hash, password)
+    def email_exists(self, email: str) -> bool:
+        user = self.get_user_by_email(email)
+        print(f"User found: {user}")
+        return user is not None
+
+    def password_is_valid(self, email: str, password: str) -> bool:
+        user = self.get_user_by_email(email)
+        if not user or 'password' not in user:
             return False
-        except Exception as e:
-            print(f"Error checking password validity: {str(e)}")
-            raise
+        return check_password_hash(user['password'], password)
+
+    def generate_jwt(self, email: str) -> str:
+        user = self.get_user_by_email(email)
+        if not user:
+            raise ValueError("User not found")
+
+        payload = {
+            'user_id': str(user['_id']),
+            'exp': datetime.now(timezone.utc) + timedelta(minutes=30)
+        }
+        token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
+        print(f"Generated JWT: {token}")
+        return token

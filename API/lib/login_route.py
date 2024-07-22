@@ -19,7 +19,8 @@ def login():
 
         if not login_processor.password_is_valid(email, password):
             return jsonify({"error": "Invalid password"}), 400
-        return jsonify("Success!"), 200
+        token = login_processor.generate_jwt(email)
+        return jsonify({'token': token}), 200
 
     except Exception as e:
         print(f"Login error: {str(e)}")

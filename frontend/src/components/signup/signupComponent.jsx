@@ -1,5 +1,4 @@
 import {useState} from "react";
-import bcrypt from 'bcryptjs'
 import Validator from "./Validator.js";
 
 const Signup = () => {
@@ -10,9 +9,6 @@ const Signup = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-
-        const saltRounds = 10;
-        const hashedPassword = await bcrypt.hash(password, saltRounds);
 
         if (firstName === "" || lastName === "" || email === "" || password === "") {
             alert('Please fill in all fields');
@@ -37,7 +33,7 @@ const Signup = () => {
             headers: {
                 'Content-Type': 'application/json',
             },
-            body: JSON.stringify({firstName, lastName, email, hashedPassword}),
+            body: JSON.stringify({firstName, lastName, email, password}),
         };
 
         try {
