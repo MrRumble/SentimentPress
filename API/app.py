@@ -3,11 +3,15 @@ from flask_cors import CORS
 from dotenv import load_dotenv
 import os
 
+from flask_jwt_extended import JWTManager
+
 load_dotenv()
 
 # Create a new Flask app
 app = Flask(__name__)
 CORS(app)
+app.config['JWT_SECRET_KEY'] = os.getenv('SECRET_KEY')
+jwt = JWTManager(app)
 
 # Import the blueprint from query_route after app creation
 from lib.query_route import *

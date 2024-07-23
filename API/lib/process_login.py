@@ -1,13 +1,14 @@
 import os
 from datetime import datetime, timedelta, timezone
 from typing import Optional
-import jwt
 from flask_bcrypt import check_password_hash
+from flask_jwt_extended import create_access_token
+from flask_jwt_extended import get_jwt_identity
+from flask_jwt_extended import jwt_required
 from dotenv import load_dotenv
 from .database_connection import DatabaseConnection
 
 load_dotenv()
-SECRET_KEY = os.getenv('SECRET_KEY')
 
 
 class LoginProcessor:
@@ -38,10 +39,8 @@ class LoginProcessor:
         if not user:
             raise ValueError("User not found")
 
-        payload = {
-            'user_id': str(user['_id']),
-            'exp': datetime.now(timezone.utc) + timedelta(minutes=30)
-        }
-        token = jwt.encode(payload, SECRET_KEY, algorithm='HS256')
+        identity = str(user['_id'])
+
+        token = create_access_token(identity=identity, expires_delta=timedelta(minutes=30))
         print(f"Generated JWT: {token}")
         return token
