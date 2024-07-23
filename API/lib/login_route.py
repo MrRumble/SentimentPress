@@ -20,7 +20,8 @@ def login():
         if not login_processor.password_is_valid(email, password):
             return jsonify({"error": "Invalid password"}), 400
         token = login_processor.generate_jwt(email)
-        return jsonify({'token': token}), 200
+        user_details = login_processor.package_user_details(email)
+        return jsonify({'token': token, 'user_details': user_details}), 200
 
     except Exception as e:
         print(f"Login error: {str(e)}")

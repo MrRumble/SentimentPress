@@ -39,8 +39,23 @@ class LoginProcessor:
         if not user:
             raise ValueError("User not found")
 
-        identity = str(user['_id'])
+        user_id = str(user['_id'])
 
-        token = create_access_token(identity=identity, expires_delta=timedelta(minutes=30))
+        token = create_access_token(identity=user_id, expires_delta=timedelta(minutes=30))
         print(f"Generated JWT: {token}")
         return token
+
+    def package_user_details(self, email: str) -> dict:
+        user = self.get_user_by_email(email)
+
+        if not user:
+            raise ValueError("User not found")
+
+        first_name = user.get('firstname', '')
+        last_name = user.get('lastname', '')
+        user_details = {
+            'first_name': first_name,
+            'last_name': last_name
+        }
+
+        return user_details
