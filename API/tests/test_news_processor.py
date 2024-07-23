@@ -1,5 +1,5 @@
 import pandas as pd
-from lib.news_processor import *
+from API.lib.news_processor import *
 
 test_data = {
     'Title': ['Title 1', 'Title 2', 'Title 3', 'Title 4'],
