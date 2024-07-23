@@ -4,4 +4,5 @@ __pycache__
 .vscode
 .pytest_cache
 .idea/
+API/.DS_Store
 API/.python-version

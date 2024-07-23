@@ -20,6 +20,7 @@ filelock==3.14.0
 Flask==3.0.3
 Flask-Bcrypt==1.0.1
 Flask-Cors==4.0.1
+Flask-JWT-Extended==4.6.0
 Flask-PyMongo==2.3.0
 flatbuffers==24.3.25
 fonttools==4.53.0
@@ -109,7 +110,7 @@ textblob==0.18.0.post0
 tf_keras==2.16.0
 threadpoolctl==3.5.0
 tokenizers==0.19.1
-torch==2.2.2
+torch==2.3.1
 tqdm==4.66.4
 transformers==4.41.2
 twilio==9.0.4
