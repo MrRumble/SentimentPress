@@ -2,7 +2,6 @@ from flask import Flask
 from flask_cors import CORS
 from dotenv import load_dotenv
 import os
-
 from flask_jwt_extended import JWTManager
 
 load_dotenv()
@@ -11,16 +10,19 @@ load_dotenv()
 app = Flask(__name__)
 CORS(app)
 app.config['JWT_SECRET_KEY'] = os.getenv('SECRET_KEY')
+app.config['JWT_ACCESS_TOKEN_EXPIRES'] = os.getenv('JWT_ACCESS_TOKEN_EXPIRES')
 jwt = JWTManager(app)
 
 # Import the blueprint from query_route after app creation
 from lib.query_route import *
 from lib.signup_route import *
 from lib.login_route import *
+from lib.logout_route import *
 
 app.register_blueprint(query_route)
 app.register_blueprint(signup_route)
 app.register_blueprint(login_route)
+app.register_blueprint(logout_route)
 
 if __name__ == '__main__':
     app.run(debug=True, port=int(os.environ.get('PORT', 5002)))

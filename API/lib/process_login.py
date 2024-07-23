@@ -1,10 +1,8 @@
-import os
-from datetime import datetime, timedelta, timezone
+import uuid
+from datetime import timedelta
 from typing import Optional
 from flask_bcrypt import check_password_hash
 from flask_jwt_extended import create_access_token
-from flask_jwt_extended import get_jwt_identity
-from flask_jwt_extended import jwt_required
 from dotenv import load_dotenv
 from .database_connection import DatabaseConnection
 
@@ -40,8 +38,13 @@ class LoginProcessor:
             raise ValueError("User not found")
 
         user_id = str(user['_id'])
+        token_id = str(uuid.uuid4())
 
-        token = create_access_token(identity=user_id, expires_delta=timedelta(minutes=30))
+        token = create_access_token(
+            identity=user_id,
+            additional_claims={'jti': token_id},
+            expires_delta=timedelta(minutes=30)  # Fix this so it works with JWT_ACCESS_TOKEN_EXPIRES in .env
+        )
         print(f"Generated JWT: {token}")
         return token
 
