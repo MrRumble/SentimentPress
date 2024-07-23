@@ -5,3 +5,4 @@ __pycache__
 .pytest_cache
 .idea/
 API/.DS_Store
+API/.python-version
