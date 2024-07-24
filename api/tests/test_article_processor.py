@@ -68,32 +68,32 @@ def test_analyse_sentiment_none_text():
 
 def test_validate_article_true():
     processor = ArticleProcessor()
-    assert processor.validate_article('title', 'description', 0.8) == True
+    assert processor.validate_article('title', 'description', 0.8) is True
 
 
 def test_validate_article_none_title_false():
     processor = ArticleProcessor()
-    assert processor.validate_article(None, 'description', 0.8) == False
+    assert processor.validate_article(None, 'description', 0.8) is False
 
 
 def test_validate_article_none_description_false():
     processor = ArticleProcessor()
-    assert processor.validate_article('title', None, 0.8) == False
+    assert processor.validate_article('title', None, 0.8) is False
 
 
 def test_validate_article_sentiment_zero_false():
     processor = ArticleProcessor()
-    assert processor.validate_article('title', 'description', 0) == False
+    assert processor.validate_article('title', 'description', 0) is False
 
 
 def test_validate_article_none_title_description_false():
     processor = ArticleProcessor()
-    assert processor.validate_article(None, None, 0.8) == False
+    assert processor.validate_article(None, None, 0.8) is False
 
 
 def test_validate_article_removed_returns_false():
     processor = ArticleProcessor()
-    assert processor.validate_article('[Removed]', '[Removed]', 0.8) == False
+    assert processor.validate_article('[Removed]', '[Removed]', 0.8) is False
 
 
 # -------- Class level test for process_article (uses every other method)

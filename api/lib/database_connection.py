@@ -13,3 +13,6 @@ class DatabaseConnection:
 
     def get_database(self):
         return self.db
+
+    def close_connection(self):
+        self.client.close()

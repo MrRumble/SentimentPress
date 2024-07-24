@@ -41,4 +41,4 @@ def test_fetch_articles_fails(mock_get_everything):
     with pytest.raises(ValueError) as e:
         fetcher.fetch_articles(query, page_size, language, yesterday_date, yesterday_date)
     error_message = str(e.value)
-    assert error_message == "Failed to fetch news articles. Check your API key or try again later."
+    assert error_message == "Failed to fetch news articles. Check your api key or try again later."

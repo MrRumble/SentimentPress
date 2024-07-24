@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import { Canvas, useFrame, useLoader } from '@react-three/fiber';
 import { Sphere } from '@react-three/drei';
 import * as THREE from 'three';
@@ -10,7 +10,7 @@ const Globe = ({ position, scale }) => {
 
   useFrame(() => {
     if (globeRef.current) {
-      globeRef.current.rotation.x += 0.003; // Adjust rotation speed if needed
+      globeRef.current.rotation.y += 0.002; // Adjust rotation speed if needed
     }
   });
 
