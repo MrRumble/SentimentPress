@@ -45,7 +45,6 @@ class LoginProcessor:
             additional_claims={'jti': token_id},
             expires_delta=timedelta(minutes=30)  # Fix this so it works with JWT_ACCESS_TOKEN_EXPIRES in .env
         )
-        print(f"Generated JWT: {token}")
         return token
 
     def package_user_details(self, email: str) -> dict:

@@ -4,11 +4,10 @@ from .sentiment_analyser import SentimentAnalyser
 from .article_summariser import ArticleSummariser
 from .data_handler import DataHandler
 
-"""
-This class serves as the core component of our system, encapsulating all functionalities related to news and articles.
-It handles the extraction of articles from a search query and identifies the top and bottom three articles based on sentiment scores. 
-The 'query' parameter, received from the front-end server via query_route.py, is processed through the 'fetch_and_process_query' method."
-"""
+"""This class serves as the core component of our system, encapsulating all functionalities related to news and 
+articles. It handles the extraction of articles from a search query and identifies the top and bottom three articles 
+based on sentiment scores. The 'query' parameter, received from the front-end server via query_route.py, is processed 
+through the 'fetch_and_process_query' method."""
 
 
 # TESTED

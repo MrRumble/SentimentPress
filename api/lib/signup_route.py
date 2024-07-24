@@ -14,8 +14,6 @@ def signup():
     email = data.get('email', '')
     password = data.get('password', '')
 
-    print(f"Received signup data: {firstname}, {lastname}, {email}, {password}")
-
     # Perform signup processing here
     signup_processor = SignupProcessor()
     if signup_processor.check_email_exists(email):

@@ -29,4 +29,4 @@ class NewsFetcher:
         if articles['status'] == 'ok':
             return articles['articles']
         else:
-            raise ValueError("Failed to fetch news articles. Check your API key or try again later.")
+            raise ValueError("Failed to fetch news articles. Check your api key or try again later.")
