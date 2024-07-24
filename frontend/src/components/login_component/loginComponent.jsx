@@ -26,6 +26,9 @@ const Login = () => {
                 console.log('Login successful');
                 console.log(data)
                 localStorage.setItem('token', data.token);
+                localStorage.setItem('firstname', data.user_details.first_name)
+                localStorage.setItem('lastname', data.user_details.last_name)
+                history.push('/home');
             } else {
                 // Handle login error
                 console.error('Login failed:', data.message);
