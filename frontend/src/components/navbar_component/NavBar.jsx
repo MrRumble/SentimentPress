@@ -1,12 +1,15 @@
+// NavBar.jsx
 import React from 'react';
-import './NavBar.css';
+import { Link } from 'react-router-dom';
+import './NavBar.css'; // Optional: for styling
 
 const NavBar = () => {
   return (
-    <div className="nav-bar">
-        <a href="/signup" className="nav-link">Sign Up</a>
-        <a href="/login" className="nav-link">Log In</a>
-        <a href="/logout" className="nav-link">Log Out</a>
+    <div className="navbar">
+      <Link to="/signup">Sign Up</Link>
+      <Link to="/login">Log In</Link>
+      <Link to="/logout">Log Out</Link>
+      <Link to="/">Search</Link>
     </div>
   );
 };
