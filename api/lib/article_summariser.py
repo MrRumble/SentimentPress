@@ -8,7 +8,7 @@ from dotenv import load_dotenv
 class ArticleSummariser:
     def __init__(self):
         load_dotenv()
-        self.text_generation_pipeline = pipeline('summarization')
+        self.text_generation_pipeline = pipeline('summarization', model="sshleifer/distilbart-cnn-12-6") # Investigate models
         self.api_key = os.getenv("OPEN_AI_KEY")
 
     def summarise_top_bottom_articles(self, df, top_n=3, bottom_n=3, max_summary_sentences=6) -> str:
