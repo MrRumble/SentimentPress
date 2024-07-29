@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import './SearchComponent.css'; // Import the CSS file
 import LoadingSpinner from '../loading_spinner_component/LoadingSpinner';
+import SentimentSpeedometer from '../speedometer_component/Speedometer';
 
 const SearchForm = () => {
     const [query, setQuery] = useState('');
