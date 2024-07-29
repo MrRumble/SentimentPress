@@ -28,7 +28,7 @@ const App = () => {
     <Router>
       <div className="app">
         <SpinningGlobe />
-        <NavBar />
+        <NavBar isLoggedIn={isLoggedIn} /> {/* Pass isLoggedIn prop */}
         <div className="content">
           <Routes>
             <Route path="/signup" element={<Signup />} />

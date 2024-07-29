@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // Import useNavigate hook
 
 const Login = ({ onLoginStatusChange }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const navigate = useNavigate(); // Initialize useNavigate
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -27,6 +29,7 @@ const Login = ({ onLoginStatusChange }) => {
         localStorage.setItem('firstname', data.user_details.first_name);
         localStorage.setItem('lastname', data.user_details.last_name);
         onLoginStatusChange(true); // Notify parent component of successful login
+        navigate('/'); // Navigate to the search page
       } else {
         console.error('Login failed:', data.message);
       }
