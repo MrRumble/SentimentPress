@@ -1,0 +1,35 @@
+/* General styling for the NavBar container */
+.navbar {
+    position: fixed; /* Fix the navbar to the top of the page */
+    top: 10px; /* Distance from the top */
+    left: 50%; /* Center the navbar horizontally */
+    transform: translateX(-50%); /* Adjust to truly center it */
+    background: rgba(39, 129, 255, 0.7); /* Translucent background */
+    border-radius: 25px; /* Rounded corners */
+    padding: 10px 20px;
+    display: flex; /* Use flexbox to align items */
+    gap: 10px; /* Space between the links */
+    align-items: center; /* Center items vertically */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: add shadow for better visibility */
+}
+
+/* Styling for the links */
+.navbar a {
+    color: white; /* Text color */
+    text-decoration: none; /* Remove underline */
+    padding: 10px 15px; /* Add padding around the text */
+    border-radius: 15px; /* Rounded corners on buttons */
+    transition: background 0.3s ease; /* Smooth transition for background color */
+}
+
+/* Hover effect for links */
+.navbar a:hover {
+    background: rgba(255, 255, 255, 0.2); /* Light translucent background on hover */
+    color: #ddd; /* Change text color on hover */
+}
+
+/* Optional: add active state styling */
+.navbar a.active {
+    background: rgba(255, 255, 255, 0.4); /* Slightly more opaque background for active state */
+    color: #fff; /* Ensure text color remains readable */
+}

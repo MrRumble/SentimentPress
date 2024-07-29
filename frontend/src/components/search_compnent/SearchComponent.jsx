@@ -1,14 +1,16 @@
 import { useState } from 'react';
 import './SearchComponent.css'; // Import the CSS file
-
-// const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+import LoadingSpinner from '../loading_spinner_component/LoadingSpinner';
+import SentimentSpeedometer from '../speedometer_component/Speedometer';
 
 const SearchForm = () => {
     const [query, setQuery] = useState('');
     const [searchResults, setSearchResults] = useState(null);
+    const [loading, setLoading] = useState(false);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        setLoading(true); // Set loading to true when starting the fetch
 
         const requestOptions = {
             method: 'POST',
@@ -27,6 +29,8 @@ const SearchForm = () => {
             setSearchResults(data);
         } catch (error) {
             console.error('Error fetching data:', error);
+        } finally {
+            setLoading(false); // Set loading to false when fetch is complete
         }
     };
 
@@ -43,7 +47,9 @@ const SearchForm = () => {
                 <button type="submit" className="search-button">Search</button>
             </form>
 
-            {searchResults && (
+            {loading && <LoadingSpinner />}
+
+            {searchResults && !loading && (
                 <div className="results-container">
                     <div className="search-info">
                         <h2>Search Info</h2>
@@ -56,32 +62,36 @@ const SearchForm = () => {
                         </ul>
                     </div>
 
-                    <div className="articles-container">
-                        <h2>Top 3 Articles</h2>
-                        <ul>
-                            {searchResults.top3.map((article, index) => (
-                                <li key={index} className="article-item">
-                                    <h3>{article.title}</h3>
-                                    <p>{article.description}</p>
-                                    <p><strong>Source:</strong> {article.source}</p>
-                                    <p><strong>Published Date:</strong> {new Date(article.published_date).toLocaleDateString()}</p>
-                                    <p><strong>Sentiment Score:</strong> {article.sentiment}</p>
-                                </li>
-                            ))}
-                        </ul>
+                    <div className="articles-layout">
+                        <div className="articles-column">
+                            <h2>Top 3 Articles</h2>
+                            <ul>
+                                {searchResults.top3.map((article, index) => (
+                                    <li key={index} className="article-item">
+                                        <h3>{article.title}</h3>
+                                        <p>{article.description}</p>
+                                        <p><strong>Source:</strong> {article.source}</p>
+                                        <p><strong>Published Date:</strong> {new Date(article.published_date).toLocaleDateString()}</p>
+                                        <p><strong>Sentiment Score:</strong> {article.sentiment}</p>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
 
-                        <h2>Bottom 3 Articles</h2>
-                        <ul>
-                            {searchResults.bottom3.map((article, index) => (
-                                <li key={index} className="article-item">
-                                    <h3>{article.title}</h3>
-                                    <p>{article.description}</p>
-                                    <p><strong>Source:</strong> {article.source}</p>
-                                    <p><strong>Published Date:</strong> {new Date(article.published_date).toLocaleDateString()}</p>
-                                    <p><strong>Sentiment Score:</strong> {article.sentiment}</p>
-                                </li>
-                            ))}
-                        </ul>
+                        <div className="articles-column">
+                            <h2>Bottom 3 Articles</h2>
+                            <ul>
+                                {searchResults.bottom3.map((article, index) => (
+                                    <li key={index} className="article-item">
+                                        <h3>{article.title}</h3>
+                                        <p>{article.description}</p>
+                                        <p><strong>Source:</strong> {article.source}</p>
+                                        <p><strong>Published Date:</strong> {new Date(article.published_date).toLocaleDateString()}</p>
+                                        <p><strong>Sentiment Score:</strong> {article.sentiment}</p>
+                                    </li>
+                                ))}
+                            </ul>
+                        </div>
                     </div>
                 </div>
             )}
