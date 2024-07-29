@@ -27,7 +27,7 @@ class NewsProcessor:
         df = self.data_handler.create_dataframe(processed_articles)
         df_sorted = self.data_handler.sort_dataframe(df)
         return df_sorted
-
+    
     def top_three_articles(self, df):
         top_articles_df = df.nlargest(3, 'Sentiment Score')
         articles = [
