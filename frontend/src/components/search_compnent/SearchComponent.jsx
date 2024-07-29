@@ -1,14 +1,15 @@
 import { useState } from 'react';
 import './SearchComponent.css'; // Import the CSS file
-
-// const BACKEND_URL = import.meta.env.VITE_BACKEND_URL;
+import LoadingSpinner from '../loading_spinner_component/LoadingSpinner';
 
 const SearchForm = () => {
     const [query, setQuery] = useState('');
     const [searchResults, setSearchResults] = useState(null);
+    const [loading, setLoading] = useState(false);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
+        setLoading(true); // Set loading to true when starting the fetch
 
         const requestOptions = {
             method: 'POST',
@@ -27,6 +28,8 @@ const SearchForm = () => {
             setSearchResults(data);
         } catch (error) {
             console.error('Error fetching data:', error);
+        } finally {
+            setLoading(false); // Set loading to false when fetch is complete
         }
     };
 
@@ -43,7 +46,9 @@ const SearchForm = () => {
                 <button type="submit" className="search-button">Search</button>
             </form>
 
-            {searchResults && (
+            {loading && <LoadingSpinner />}
+
+            {searchResults && !loading && (
                 <div className="results-container">
                     <div className="search-info">
                         <h2>Search Info</h2>

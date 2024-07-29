@@ -4,7 +4,7 @@
     top: 10px; /* Distance from the top */
     left: 50%; /* Centre the navbar horizontally */
     transform: translateX(-50%); /* Adjust to truly centre it */
-    background: rgba(0, 0, 0, 0.3); /* Translucent background */
+    background: rgba(37, 117, 183, 0.3); /* Translucent background */
     border-radius: 25px; /* Cylindrical shape */
     padding: 10px 20px;
     display: flex; /* Use flexbox to align items */
