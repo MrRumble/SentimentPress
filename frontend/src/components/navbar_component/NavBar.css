@@ -1,0 +1,26 @@
+.nav-bar {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    display: flex;
+    flex-direction: column;
+    background-color: #333;
+    border-radius: 50px; /* Make the component cylindrical */
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  }
+  
+  .nav-link {
+    color: white;
+    text-decoration: none;
+    margin: 5px 0;
+    padding: 10px 20px;
+    border-radius: 25px; /* Cylindrical links */
+    background-color: #555;
+    transition: background-color 0.3s;
+  }
+  
+  .nav-link:hover {
+    background-color: #777;
+  }
+  
