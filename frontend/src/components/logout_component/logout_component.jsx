@@ -25,7 +25,7 @@ const Logout = ({ onLogout }) => {
       }
     } catch (error) {
       console.error('Logout failed:', error);
-    }
+    } 
   };
 
   return (

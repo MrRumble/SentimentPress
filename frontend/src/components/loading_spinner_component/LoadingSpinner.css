@@ -3,7 +3,7 @@
     justify-content: center;
     align-items: center;
     height: 100vh; /* Full viewport height to center the spinner */
-    transform: translateY(-150px); /* Adjust this value to move the spinner up or down */
+    transform: translateY(-250px); /* Adjust this value to move the spinner up or down */
 }
 
 .loading-spinner {
