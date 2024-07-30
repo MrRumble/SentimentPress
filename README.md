@@ -11,6 +11,7 @@ Don't let the news give you the headline headache! This project aims to simplify
 - REDIS_HOST
 - REDIS_PORT
 - REDIS_DB
+- REDIS_TEST_DB
 - SECRET_KEY
 
 ## Redis Setup
