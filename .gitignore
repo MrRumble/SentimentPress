@@ -7,3 +7,4 @@ __pycache__
 api/.DS_Store
 api/.python-version
 qodana.yaml
+*.rdb
