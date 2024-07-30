@@ -4,15 +4,16 @@ import os
 
 load_dotenv()
 
-
 class RedisConnection:
     def __init__(self,
                  host=os.environ.get("REDIS_HOST"),
                  port=os.environ.get("REDIS_PORT"),
-                 db=os.environ.get("REDIS_DB")):
+                 db=os.environ.get("REDIS_DB"),
+                 test_db=os.environ.get("REDIS_TEST_DB"),
+                 use_test_db=False):
         self.host = host
         self.port = port
-        self.db = db
+        self.db = test_db if use_test_db else db
         self.connection = None
 
     def __enter__(self):

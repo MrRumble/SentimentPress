@@ -16,6 +16,13 @@ Don't let the news give you the headline headache! This project aims to simplify
 ## Redis Setup
 
 - brew install redis
+- set up a production db and test_tb
+
+To switch between production DB and test DB in Redis Insight:
+- SELECT 0   <- Production DB
+- SELECT 1   <- Test DB
+
+Make sure these are matched in your .env file.
 
 ## Performance Imrovements
 
