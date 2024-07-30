@@ -4,6 +4,15 @@
 ## Description
 Don't let the news give you the headline headache! This project aims to simplify the process of fetching headlines from various news sources and analyzing their sentiment.
 
+<div style="padding:48.75% 0 0 0;position:relative;">
+  <iframe src="https://player.vimeo.com/video/992234390?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479" 
+          frameborder="0" 
+          allow="autoplay; fullscreen; picture-in-picture; clipboard-write" 
+          style="position:absolute;top:0;left:0;width:100%;height:100%;" 
+          title="SentimentPress Demo">
+  </iframe>
+</div>
+<script src="https://player.vimeo.com/api/player.js"></script>
 ## Requirements
 
 - NEWSAPI_KEY
