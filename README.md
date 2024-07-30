@@ -12,7 +12,7 @@ Don't let the news give you the headline headache! This project aims to simplify
           title="SentimentPress Demo">
   </iframe>
 </div>
-<script src="https://player.vimeo.com/api/player.js"></script>
+
 ## Requirements
 
 - NEWSAPI_KEY
