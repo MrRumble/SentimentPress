@@ -1,4 +1,4 @@
-from API.lib.article_processor import ArticleProcessor
+from api.lib.article_processor import ArticleProcessor
 from datetime import datetime, timedelta
 from unittest.mock import patch, MagicMock
 import pytest
@@ -30,7 +30,7 @@ def test_combine_text():
     assert processor.combine_text(title, description) == 'title. description'
 
 
-@patch('API.lib.article_processor.pipeline')
+@patch('api.lib.article_processor.pipeline')
 def test_analyse_sentiment_positive(mock_pipeline):
     mock_sentiment = MagicMock(return_value=[{'label': 'POSITIVE', 'score': 0.9}])
     mock_pipeline.return_value = mock_sentiment
@@ -41,7 +41,7 @@ def test_analyse_sentiment_positive(mock_pipeline):
     assert result == 0.9
 
 
-@patch('API.lib.article_processor.pipeline')
+@patch('api.lib.article_processor.pipeline')
 def test_analyse_sentiment_negative(mock_pipeline):
     mock_sentiment = MagicMock(return_value=[{'label': 'NEGATIVE', 'score': 0.8}])
     mock_pipeline.return_value = mock_sentiment

@@ -1,7 +1,5 @@
-from API.lib.redis_connection import RedisConnection
-from API.lib.redis_manager import add_to_blacklist, is_blacklisted
-import requests
-import pytest
+from api.lib.redis_connection import RedisConnection
+from api.lib.redis_manager import add_to_blacklist, is_blacklisted
 
 def test_connection_to_test_db():
     """
