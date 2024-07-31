@@ -55,7 +55,7 @@ news_categories = [
     "Opinion", "Local", "National", "International", "Finance", "Real Estate",
     "Automotive", "Food", "Arts", "Music", "Movies", "Television", "Social Media",
     "Gaming", "Cryptocurrency", "Legal", "History", "Religion", "Weather", "Crime",
-    "Military", "Fashion", "Celebrity", "Technology", "Startup", "Trump", "Biden", "Olympics"
+    "Military", "Fashion", "Celebrity", "Technology", "Startup", "Trump", "Biden", "Olympics", 'Kamala'
 ]
 
 populator = NewsCategoryPopulator(news_categories)

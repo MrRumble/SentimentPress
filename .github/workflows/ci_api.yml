@@ -3,14 +3,14 @@ name: Python CI
 on:
   push:
     branches:
-      - main  # Trigger on pushes to the main branch
+      - main  
   pull_request:
     branches:
-      - main  # Trigger on pull requests targeting the main branch
+      - main 
 
 jobs:
   build:
-    runs-on: ubuntu-latest  # You can also use windows-latest or macos-latest
+    runs-on: ubuntu-latest
 
     steps:
     - name: Checkout code
@@ -19,14 +19,14 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v4
       with:
-        python-version: '3.11.0'  # Specify the Python version
+        python-version: '3.11.0'  
 
     - name: Cache Python packages
       uses: actions/cache@v3
       with:
         path: |
           ~/.cache/pip
-        key: ${{ runner.os }}-pip-${{ hashFiles('API/requirements.txt') }}
+        key: ${{ runner.os }}-pip-${{ hashFiles('api/requirements.txt') }}
         restore-keys: |
           ${{ runner.os }}-pip-
 
