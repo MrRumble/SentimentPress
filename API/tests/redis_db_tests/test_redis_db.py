@@ -42,6 +42,4 @@ def test_is_blacklisted_returns_true_if_in_db():
         assert result is True
         assert false_result is False
         redis_connection.delete(test_key)
-        
-        
 
