@@ -1,4 +1,4 @@
-from .database_connection import DatabaseConnection
+from api.lib.database_connection import DatabaseConnection
 from flask_bcrypt import Bcrypt
 
 

@@ -4,7 +4,7 @@ from typing import Optional
 from flask_bcrypt import check_password_hash
 from flask_jwt_extended import create_access_token
 from dotenv import load_dotenv
-from .database_connection import DatabaseConnection
+from api.lib.database_connection import DatabaseConnection
 
 load_dotenv()
 

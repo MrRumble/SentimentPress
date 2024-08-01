@@ -1,8 +1,8 @@
 from datetime import datetime
-from .sentiment_analyser import SentimentAnalyser
-from .news_processor import NewsProcessor
-from .database_connection import DatabaseConnection
-from .article_summariser import ArticleSummariser
+from api.lib.sentiment_analyser import SentimentAnalyser
+from api.lib.news_processor import NewsProcessor
+from api.lib.database_connection import DatabaseConnection
+from api.lib.article_summariser import ArticleSummariser
 
 
 class QueryProcessor:

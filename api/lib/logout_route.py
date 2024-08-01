@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_cors import CORS
-from .redis_manager import add_to_blacklist
+from api.lib.redis_manager import add_to_blacklist
 from flask_jwt_extended import get_jti
 
 logout_route = Blueprint('logout_route', __name__)

@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_cors import CORS
-from .process_signup import SignupProcessor
+from api.lib.process_signup import SignupProcessor
 
 signup_route = Blueprint('signup_route', __name__)
 CORS(signup_route)

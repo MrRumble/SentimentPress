@@ -1,4 +1,4 @@
-from .redis_connection import RedisConnection
+from api.lib.redis_connection import RedisConnection
 
 
 def add_to_blacklist(jti, expires_at=30, use_test_db=False):  # Expiry time is in SECONDS

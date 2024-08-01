@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from .process_query import QueryProcessor
+from api.lib.process_query import QueryProcessor
 from flask_cors import CORS
 
 from .token_manager import TokenManager

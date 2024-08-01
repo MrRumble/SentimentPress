@@ -1,8 +1,8 @@
-from .news_fetcher import NewsFetcher
-from .article_processor import ArticleProcessor
-from .sentiment_analyser import SentimentAnalyser
-from .article_summariser import ArticleSummariser
-from .data_handler import DataHandler
+from api.lib.news_fetcher import NewsFetcher
+from api.lib.article_processor import ArticleProcessor
+from api.lib.sentiment_analyser import SentimentAnalyser
+from api.lib.article_summariser import ArticleSummariser
+from api.lib.data_handler import DataHandler
 
 """This class serves as the core component of our system, encapsulating all functionalities related to news and 
 articles. It handles the extraction of articles from a search query and identifies the top and bottom three articles 
