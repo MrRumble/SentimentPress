@@ -5,7 +5,7 @@ import os
 from flask_jwt_extended import JWTManager
 from lib.query_route import query_route
 from lib.signup_route import signup_route
-from lib.login_route import login_route
+from api.lib.login_route import login_route
 from lib.logout_route import logout_route
 
 load_dotenv()

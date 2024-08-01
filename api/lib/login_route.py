@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, request
 from flask_cors import CORS
-from .process_login import LoginProcessor
+from api.lib.process_login import LoginProcessor
 
 login_route = Blueprint('login_route', __name__)
 CORS(login_route)
