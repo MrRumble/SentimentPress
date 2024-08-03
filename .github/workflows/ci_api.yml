@@ -38,13 +38,16 @@ jobs:
     - name: Set PYTHONPATH
       run: |
         echo "PYTHONPATH=$(pwd)/api" >> $GITHUB_ENV
-        echo "PYTHONPATH=$(pwd)/api"
+        export PYTHONPATH=$(pwd)/api
+        echo "PYTHONPATH is set to: $PYTHONPATH"
 
     - name: Print PYTHONPATH
-      run: echo $PYTHONPATH
+      run: |
+        echo "PYTHONPATH=$PYTHONPATH"
 
     - name: Run tests
       env:
         PYTHONPATH: ${{ github.workspace }}/api
       run: |
+        echo "PYTHONPATH during test: $PYTHONPATH"
         pytest api/tests
