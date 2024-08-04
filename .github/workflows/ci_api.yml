@@ -42,8 +42,10 @@ jobs:
         echo "PYTHONPATH is set to: $PYTHONPATH"
 
     - name: Print PYTHONPATH
-      run: |
-        echo "PYTHONPATH=$PYTHONPATH"
+      run: echo "PYTHONPATH=$PYTHONPATH"
+
+    - name: List directory structure
+      run: ls -R
 
     - name: Run tests
       env:
