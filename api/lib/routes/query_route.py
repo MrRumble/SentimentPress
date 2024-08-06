@@ -22,7 +22,6 @@ def query():
     result_if_cached = query_cache.get_query_result_if_exists_today(query_text)
     if result_if_cached:
         print("Result already in database")
-        print(response_data_front_end)
         response_data_front_end = query_cache.format_cached_result(result_if_cached)
         # TODO save the duplicate query to the db, 
         # might be useful to get count data of a query.
