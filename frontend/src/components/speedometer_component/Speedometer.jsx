@@ -2,6 +2,7 @@
 
 import React from 'react';
 import ReactSpeedometer from "react-d3-speedometer";
+import './Speedometer.css';
 
 const Speedometer = ({ value }) => {
   return (
@@ -11,6 +12,7 @@ const Speedometer = ({ value }) => {
         maxValue={1}
         value={value}
         segments={5}
+        height={300}
         customSegmentStops={[-1, -0.6, -0.2, 0.2, 0.6, 1]}
         segmentColors={["#d9534f", "#f0ad4e", "#f7f7f7", "#5bc0de", "#5cb85c"]}
         needleColor="black"

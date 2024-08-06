@@ -58,3 +58,8 @@ ul {
     padding: 0;
     margin: 0;
 }
+
+.speedometer-container {
+    margin-bottom: 20px; /* Space below the Speedometer */
+    text-align: center; /* Center the Speedometer */
+}

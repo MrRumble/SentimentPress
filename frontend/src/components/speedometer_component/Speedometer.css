@@ -1,0 +1,13 @@
+
+.speedometer-container {
+    margin-bottom: 0px; /* Adjust space below the speedometer */
+    text-align: center; /* Center the speedometer */
+}
+
+.speedometer-wrapper {
+    display: inline-block; /* Ensure speedometer doesn't stretch full width */
+    padding: 10px; /* Add some padding around the speedometer */
+    background-color: #f7f7f7; /* Light background for visual separation (optional) */
+    border-radius: 8px; /* Rounded corners for a polished look (optional) */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Light shadow for visual depth (optional) */
+}
