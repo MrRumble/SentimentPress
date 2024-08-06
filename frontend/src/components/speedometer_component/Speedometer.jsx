@@ -13,6 +13,8 @@ const Speedometer = ({ value }) => {
         value={value}
         segments={5}
         height={300}
+        needleTransitionDuration={4000}
+        needleTransition="easeElastic"
         customSegmentStops={[-1, -0.6, -0.2, 0.2, 0.6, 1]}
         segmentColors={["#d9534f", "#f0ad4e", "#f7f7f7", "#5bc0de", "#5cb85c"]}
         needleColor="black"

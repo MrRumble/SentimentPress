@@ -16,9 +16,6 @@ const ResultsInfo = ({ queryInfo }) => {
                 <strong>Negative Count:</strong> {queryInfo.negative_count}
             </div>
             <div className="info-item">
-                <strong>Mean Sentiment:</strong> {queryInfo.mean_sentiment}
-            </div>
-            <div className="info-item">
                 <strong>Summary:</strong> {queryInfo.summary}
             </div>
         </div>

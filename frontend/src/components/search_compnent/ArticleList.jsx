@@ -12,7 +12,7 @@ const ArticleList = ({ title, articles }) => {
                         <p>{article.description}</p>
                         <p><strong>Source:</strong> {article.source}</p>
                         <p><strong>Published Date:</strong> {new Date(article.published_date).toLocaleDateString()}</p>
-                        <p><strong>Sentiment Score:</strong> {article.sentiment}</p>
+                        <p><strong>Sentiment Score:</strong> {article.sentiment.toFixed(4)}</p>
                     </li>
                 ))}
             </ul>
