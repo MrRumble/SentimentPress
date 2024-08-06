@@ -31,6 +31,8 @@ This project is organised into several directories to separate core components, 
 - **`redis_manager.py`**: Manages operations related to Redis.
 - **`token_manager.py`**: Includes functions related to token creation and validation.
 - **`generate_secret_key.py`**: Script for generating a secret key.
+- **`query_cache_manager.py`**: Manages the caching of query results. This class handles checking if a query has been processed and cached for the current day, thereby bypassing the need for a fresh API call if a cached result is available. It formats cached results into a structured response format to be used in the application.
+
 
 ### `routes/`
 
