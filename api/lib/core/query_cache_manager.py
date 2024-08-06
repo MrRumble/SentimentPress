@@ -2,6 +2,13 @@ from api.lib.core.database_connection import DatabaseConnection
 import datetime
 
 class QueryCacheManager:
+    """
+    The QueryCacheManager class is responsible for managing and 
+    handling cached query results within the application. 
+    Its primary functions are to check for the existence of cached query 
+    results for the current day and format these results to match the 
+    required response structure for the API.
+    """
     def __init__(self) -> None:
         self.db = DatabaseConnection()
         self.date_today = datetime.datetime.now().strftime("%Y-%m-%d")
