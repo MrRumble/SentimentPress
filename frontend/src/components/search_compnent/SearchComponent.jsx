@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import './SearchComponent.css'; // Import the CSS file
 import LoadingSpinner from '../loading_spinner_component/LoadingSpinner';
-import SentimentSpeedometer from '../speedometer_component/Speedometer';
+import Speedometer from '../speedometer_component/Speedometer'; // Adjust the path as necessary
 
 const SearchForm = () => {
     const [query, setQuery] = useState('');
@@ -92,6 +92,11 @@ const SearchForm = () => {
                                 ))}
                             </ul>
                         </div>
+                    </div>
+
+                    {/* Include the Speedometer component here */}
+                    <div className="speedometer-container">
+                        <Speedometer value={searchResults.query_info.mean_sentiment} />
                     </div>
                 </div>
             )}
