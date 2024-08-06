@@ -3,7 +3,8 @@
 import { useState } from 'react';
 import './SearchComponent.css'; // Import the CSS file
 import LoadingSpinner from '../loading_spinner_component/LoadingSpinner';
-import Speedometer from '../speedometer_component/Speedometer'; // Adjust the path as necessary
+import SearchInput from './SearchInput';
+import SearchResults from './SearchResults';
 
 const SearchForm = () => {
     const [query, setQuery] = useState('');
@@ -38,70 +39,12 @@ const SearchForm = () => {
 
     return (
         <div className="search-container">
-            <form onSubmit={handleSubmit} className="search-form">
-                <input
-                    type="text"
-                    value={query}
-                    onChange={(e) => setQuery(e.target.value)}
-                    placeholder="Enter your search query"
-                    className="search-input"
-                />
-                <button type="submit" className="search-button">Search</button>
-            </form>
+            <SearchInput query={query} setQuery={setQuery} handleSubmit={handleSubmit} />
 
             {loading && <LoadingSpinner />}
 
             {searchResults && !loading && (
-                <div>
-                    <div className="speedometer-container">
-                        <Speedometer value={searchResults.query_info.mean_sentiment} />
-                    </div>
-
-                    <div className="results-container">
-                        <div className="search-info">
-                            {/* <h2>Search Info</h2> */}
-                            <ul>
-                                <li><strong>Total Articles:</strong> {searchResults.query_info.total_articles}</li>
-                                <li><strong>Positive Count:</strong> {searchResults.query_info.positive_count}</li>
-                                <li><strong>Negative Count:</strong> {searchResults.query_info.negative_count}</li>
-                                <li><strong>Mean Sentiment:</strong> {searchResults.query_info.mean_sentiment}</li>
-                                <li><strong>Summary:</strong> {searchResults.query_info.summary}</li>
-                            </ul>
-                        </div>
-
-                        <div className="articles-layout">
-                            <div className="articles-column">
-                                <h2>Top 3 Articles</h2>
-                                <ul>
-                                    {searchResults.top3.map((article, index) => (
-                                        <li key={index} className="article-item">
-                                            <h3>{article.title}</h3>
-                                            <p>{article.description}</p>
-                                            <p><strong>Source:</strong> {article.source}</p>
-                                            <p><strong>Published Date:</strong> {new Date(article.published_date).toLocaleDateString()}</p>
-                                            <p><strong>Sentiment Score:</strong> {article.sentiment}</p>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-
-                            <div className="articles-column">
-                                <h2>Bottom 3 Articles</h2>
-                                <ul>
-                                    {searchResults.bottom3.map((article, index) => (
-                                        <li key={index} className="article-item">
-                                            <h3>{article.title}</h3>
-                                            <p>{article.description}</p>
-                                            <p><strong>Source:</strong> {article.source}</p>
-                                            <p><strong>Published Date:</strong> {new Date(article.published_date).toLocaleDateString()}</p>
-                                            <p><strong>Sentiment Score:</strong> {article.sentiment}</p>
-                                        </li>
-                                    ))}
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                <SearchResults searchResults={searchResults} />
             )}
         </div>
     );
