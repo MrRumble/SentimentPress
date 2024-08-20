@@ -13,6 +13,7 @@ class TokenManager:
     def verify_token(self, token):
         try:
             # Use the JWT_SECRET_KEY directly in token verification
+            print(f"Loaded SECRET_KEY: {self.secret_key}")
             payload = jwt.decode(token, self.secret_key, algorithms=["HS256"])
             return payload
         except jwt.ExpiredSignatureError:

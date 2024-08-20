@@ -28,6 +28,7 @@ const Login = ({ onLoginStatusChange }) => {
         localStorage.setItem('token', data.token);
         localStorage.setItem('firstname', data.user_details.first_name);
         localStorage.setItem('lastname', data.user_details.last_name);
+        localStorage.setItem('user_id', data.user_details.user_id);
         onLoginStatusChange(true); // Notify parent component of successful login
         navigate('/'); // Navigate to the search page
       } else {

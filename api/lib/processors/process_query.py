@@ -67,3 +67,23 @@ class QueryProcessor:
     def save_search_result_to_db(self, search_result):
         db_connection = self.database_connection.get_database()
         db_connection["search-results"].insert_one(search_result)
+
+    def set_search_metadata(self, search_id:str, search_term:str, user_id:int):
+        search_meta_data = {
+            "search_date": datetime.now().strftime('%d-%m-%Y'),  # Convert datetime to string with the correct format
+            "search_time": datetime.now().time().strftime('%H:%M:%S'),   # Get the current time
+            "search_id": search_id,
+            "search_term": search_term,
+            "user_id": user_id
+            }
+        return search_meta_data
+    
+    def save_search_metatdata_to_db(self, search_metadata):
+        print('METADATA!!!!', search_metadata, type(search_metadata))
+        db_connection = self.database_connection.get_database()
+        db_connection["search-metadata"].insert_one(search_metadata)
+
+    
+
+
+
