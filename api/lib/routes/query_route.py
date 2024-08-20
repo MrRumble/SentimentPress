@@ -19,20 +19,21 @@ def query():
 
     # Check if the query is already in the database for the day.
     result_if_cached = query_cache.get_query_result_if_exists_today(query_text)
-    search_id = str(result_if_cached.get('_id'))
+    
     # Pull search_id and search_term from result_if_cached if exists.
     if result_if_cached:
+        search_id = result_if_cached.get('_id')
         response_data_front_end = query_cache.format_cached_result(result_if_cached)
+        
         search_metadata = processor.set_search_metadata(search_id, query_text, user_id)
-        processor.save_search_metatdata_to_db(search_metadata)
-        # set_search_metadata() and save_seatch_metatdata_to_db()  
+        processor.save_search_metatdata_to_db(search_metadata)  
         
     else:
         response_data_front_end, search_result = processor.process_query(query_text, user_id)
-        processor.save_search_result_to_db(search_result)
-        # HANDLE THIS CASE!!!!!
+        search_id = processor.save_search_result_to_db(search_result)
+
         search_metadata = processor.set_search_metadata(search_id, query_text, user_id)
-        # Pull search_id and search_term from result_if_cached if exists.
-        # set_search_metadata() and save_seatch_metatdata_to_db()  
+        processor.save_search_metatdata_to_db(search_metadata)
+ 
 
     return jsonify(response_data_front_end)
