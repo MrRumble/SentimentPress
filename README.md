@@ -60,7 +60,7 @@ This project is organised into several directories to separate core components, 
 
 ### `scripts/`
 
-**Table Design**:
+# Table Design:
 # Search Result Data
 
 | **Field**                      | **Value (Data Type)**                |
