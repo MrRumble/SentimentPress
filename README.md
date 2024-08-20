@@ -60,10 +60,128 @@ This project is organised into several directories to separate core components, 
 
 ### `scripts/`
 
-**Purpose**: Contains standalone utility scripts used for administrative tasks, development, or maintenance of the application.
+**Table Design**:
+# Search Result Data
 
-**Files**:
-- **`news_category_populator.py`**: Script for populating the database with predefined news categories and adding custom queries. This script is intended for administrative use and will use API calls, so caution is advised.
+| **Field**                      | **Value (Data Type)**                |
+|--------------------------------|--------------------------------------|
+| **_id**                        | `ObjectId`                            |
+| **search_term**                | `string`                              |
+| **search_date**                | `ISO8601 datetime`                    |
+| **sentiment_score**            | `float`                               |
+| **positive_article_count**     | `integer`                             |
+| **negative_article_count**     | `integer`                             |
+| **total_article_count**        | `integer`                             |
+| **ratio_positive_vs_negative** | `float`                               |
+| **main_headline**              | `string`                              |
+| **top_3_articles**             | `Array of Objects`                    |
+| **bottom_3_articles**             | `Array of Objects`                    |
+
+### Top 3 Articles
+
+These articles are sorted based on their sentiment score:
+
+| **Index** | **Field**         | **Value (Data Type)**                |
+|-----------|-------------------|--------------------------------------|
+| **0**     | **Object**        |                                      |
+|           | title             | `string`                              |
+|           | description       | `string`                              |
+|           | published_date    | `ISO8601 datetime`                    |
+|           | source            | `string`                              |
+|           | sentiment         | `float`                               |
+| **1**     | **Object**        |                                      |
+|           | title             | `string`                              |
+|           | description       | `string`                              |
+|           | published_date    | `ISO8601 datetime`                    |
+|           | source            | `string`                              |
+|           | sentiment         | `float`                               |
+| **2**     | **Object**        |                                      |
+|           | title             | `string`                              |
+|           | description       | `string`                              |
+|           | published_date    | `ISO8601 datetime`                    |
+|           | source            | `string`                              |
+|           | sentiment         | `float`                               |
+
+### Bottom 3 Articles
+
+| **Index** | **Field**         | **Value (Data Type)**                |
+|-----------|-------------------|--------------------------------------|
+| **0**     | **Object**        |                                      |
+|           | title             | `string`                              |
+|           | description       | `string`                              |
+|           | published_date    | `ISO8601 datetime`                    |
+|           | source            | `string`                              |
+|           | sentiment         | `float`                               |
+| **1**     | **Object**        |                                      |
+|           | title             | `string`                              |
+|           | description       | `string`                              |
+|           | published_date    | `ISO8601 datetime`                    |
+|           | source            | `string`                              |
+|           | sentiment         | `float`                               |
+| **2**     | **Object**        |                                      |
+|           | title             | `string`                              |
+|           | description       | `string`                              |
+|           | published_date    | `ISO8601 datetime`                    |
+|           | source            | `string`                              |
+|           | sentiment         | `float`                               |
+
+
+# Search Metadata
+
+| **Field**        | **Value (Data Type)** |
+|------------------|------------------------|
+| **_id**          | `ObjectId`             |
+| **search_date**  | `string` (Date)        |
+| **search_time**  | `string` (Time)        |
+| **search_id**    | `string`               |
+| **search_term**  | `string`               |
+| **user_id**      | `string` or `null`     |
+
+### Note
+- **user_id**: Can be a `string` or `null` if no user ID is assigned.
+
+# User Data Table Design
+
+| Field        | Data Type | Description                              |
+|--------------|-----------|------------------------------------------|
+| `_id`        | ObjectId  | Unique identifier for the user           |
+| `username`   | String    | User's login name                        |
+| `first_name` | String    | User's first name                        |
+| `last_name`  | String    | User's last name                         |
+| `email`      | String    | User's email address                     |
+| `password`   | String    | User's password (masked)                 |
+
+# Analysis of Search Data
+
+## 1. Analysing Popular Searches
+
+### Search Term Analysis
+
+- **Frequency Analysis:** By aggregating data based on `search_term`, you can identify which search terms are most frequently queried. This helps in understanding current trends or topics of interest.
+- **Trend Analysis:** Track how search terms vary over time. For example, you might analyse how the frequency of certain search terms changes over weeks or months.
+
+### Temporal Patterns
+
+- **Date and Time Analysis:** By examining `search_date` and `search_time`, you can identify peak search times and days. This helps in scheduling content or optimising server load.
+- **Seasonal Trends:** Analyse whether certain search terms spike during particular times of the year. For instance, political events might increase searches related to specific politicians.
+
+## 2. Gaining Insights
+
+### User Behaviour
+
+- **User Engagement:** While the `user_id` is `null` in this case, if present, it can help track which users are performing searches. This can be used to segment users based on their search behaviours.
+- **Personalisation:** By associating searches with user IDs, you can tailor content recommendations based on previous search patterns of individual users.
+
+### Search Performance
+
+- **Search ID Tracking:** Each search has a unique `search_id`, which helps in tracking and analysing the results of specific searches. This can be useful for debugging, auditing, and improving search functionalities.
+
+### Contextual Analysis
+
+- **Search Term Context:** Analyse the context or associated content of popular search terms to provide deeper insights into why certain topics are trending. This might involve connecting search terms with articles or news content.
+
+
+
 
 ## Usage
 
