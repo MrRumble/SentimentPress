@@ -15,19 +15,25 @@ query_cache = QueryCacheManager()
 def query():
     data = request.get_json()
     query_text = data.get('query', '')
-    payload = token_manager.verify_token(request.headers.get('Authorization'))
-    user_id = payload.get('user_id', None) if payload else None
+    user_id = data.get('user_id')
 
     # Check if the query is already in the database for the day.
     result_if_cached = query_cache.get_query_result_if_exists_today(query_text)
+    
+    # Pull search_id and search_term from result_if_cached if exists.
     if result_if_cached:
-        print("Result already in database")
+        search_id = result_if_cached.get('_id')
         response_data_front_end = query_cache.format_cached_result(result_if_cached)
-        # TODO save the duplicate query to the db, 
-        # might be useful to get count data of a query.
-
+        
+        search_metadata = processor.set_search_metadata(search_id, query_text, user_id)
+        processor.save_search_metatdata_to_db(search_metadata)  
+        
     else:
         response_data_front_end, search_result = processor.process_query(query_text, user_id)
-        processor.save_search_result_to_db(search_result)
+        search_id = processor.save_search_result_to_db(search_result)
+
+        search_metadata = processor.set_search_metadata(search_id, query_text, user_id)
+        processor.save_search_metatdata_to_db(search_metadata)
+ 
 
     return jsonify(response_data_front_end)

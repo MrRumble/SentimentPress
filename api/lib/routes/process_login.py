@@ -55,7 +55,9 @@ class LoginProcessor:
 
         first_name = user.get('firstname', '')
         last_name = user.get('lastname', '')
+        user_id = str(user.get('_id', ''))
         user_details = {
+            'user_id': user_id,
             'first_name': first_name,
             'last_name': last_name
         }

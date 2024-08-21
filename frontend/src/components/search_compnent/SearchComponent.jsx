@@ -15,13 +15,15 @@ const SearchForm = () => {
         event.preventDefault();
         setLoading(true); // Set loading to true when starting the fetch
 
+        const user_id = localStorage.getItem('user_id');
+
         const requestOptions = {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'Authorization': localStorage.getItem('token')
             },
-            body: JSON.stringify({ query }),
+            body: JSON.stringify({ query, user_id }),
         };
 
         try {

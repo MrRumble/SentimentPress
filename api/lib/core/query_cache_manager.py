@@ -24,7 +24,6 @@ class QueryCacheManager:
         }
         
         result = self.db.find_one_query("search-results", search_query)
-
         return result
 
     def format_cached_result(self, result):
