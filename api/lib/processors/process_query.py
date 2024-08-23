@@ -47,10 +47,10 @@ class QueryProcessor:
         }
 
         # Prepare search result object
-        current_datetime = datetime.now()
         search_result_object = {
             "search_term": query,
-            "search_date": current_datetime,
+            "search_date": datetime.now().strftime('%d-%m-%Y'),
+            "search_time": datetime.now().time().strftime('%H:%M:%S'),
             "sentiment_score": mean_sentiment,
             "positive_article_count": positive_count,
             "negative_article_count": negative_count,
@@ -69,7 +69,7 @@ class QueryProcessor:
         result = db_connection["search-results"].insert_one(search_result)
         return result.inserted_id
 
-    def set_search_metadata(self, search_id:str, search_term:str, user_id:int):
+    def set_search_metadata(self, search_id, search_term:str, user_id):
         search_meta_data = {
             "search_date": datetime.now().strftime('%d-%m-%Y'),  # Convert datetime to string with the correct format
             "search_time": datetime.now().time().strftime('%H:%M:%S'),   # Get the current time
@@ -83,7 +83,7 @@ class QueryProcessor:
         db_connection = self.database_connection.get_database()
         db_connection["search-metadata"].insert_one(search_metadata)
 
-    
+
 
 
 
