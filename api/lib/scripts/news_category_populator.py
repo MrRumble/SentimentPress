@@ -45,7 +45,7 @@ class NewsCategoryPopulator:
         else:
             print("Invalid choice. Please enter 1 or 2.")
 
-
+    
 # ------------- python news_category_populator.py -------------- #
 
 news_categories = [

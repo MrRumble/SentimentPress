@@ -3,6 +3,7 @@ from api.lib.processors.process_query import QueryProcessor
 from flask_cors import CORS
 from api.lib.core.query_cache_manager import QueryCacheManager
 from api.lib.core.token_manager import TokenManager
+from bson import ObjectId
 
 query_route = Blueprint('query_route', __name__)
 CORS(query_route)
@@ -14,8 +15,8 @@ query_cache = QueryCacheManager()
 @query_route.route("/query", methods=["POST"])
 def query():
     data = request.get_json()
-    query_text = data.get('query', '')
-    user_id = data.get('user_id')
+    query_text = data.get('query', '').lower() #Force .lower() here?
+    user_id = ObjectId(data.get('user_id'))
 
     # Check if the query is already in the database for the day.
     result_if_cached = query_cache.get_query_result_if_exists_today(query_text)
@@ -34,6 +35,6 @@ def query():
 
         search_metadata = processor.set_search_metadata(search_id, query_text, user_id)
         processor.save_search_metatdata_to_db(search_metadata)
- 
+
 
     return jsonify(response_data_front_end)

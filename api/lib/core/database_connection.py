@@ -11,6 +11,7 @@ class DatabaseConnection:
         self.client = MongoClient(uri, server_api=ServerApi('1'))
         self.db = self.client["sentiment-press"]
 
+
     def find_one_query(self, collection_name, query):
         collection = self.db[collection_name]
         return collection.find_one(query)
