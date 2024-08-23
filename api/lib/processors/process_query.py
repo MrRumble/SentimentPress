@@ -47,10 +47,10 @@ class QueryProcessor:
         }
 
         # Prepare search result object
-        current_datetime = datetime.now()
         search_result_object = {
             "search_term": query,
-            "search_date": current_datetime,
+            "search_date": datetime.now().strftime('%d-%m-%Y'),
+            "search_time": datetime.now().time().strftime('%H:%M:%S'),
             "sentiment_score": mean_sentiment,
             "positive_article_count": positive_count,
             "negative_article_count": negative_count,
